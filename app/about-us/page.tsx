@@ -86,7 +86,7 @@ export default function AboutUsPage() {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
               Authoritative China Freight <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400">
+              <span className="text-sky-400">
                 Forwarding &amp; Governance
               </span>
             </h1>
@@ -170,7 +170,7 @@ export default function AboutUsPage() {
           </div>
 
           <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-3 shadow-sm">
-            <div className="flex items-center gap-2 text-indigo-600">
+            <div className="flex items-center gap-2 text-blue-600">
               <Building2 className="h-5 w-5" />
               <span className="text-xs font-bold uppercase tracking-wider">Legal Corporate Entity</span>
             </div>

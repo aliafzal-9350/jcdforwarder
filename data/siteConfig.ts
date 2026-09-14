@@ -133,7 +133,7 @@ export const SITE_CONFIG: SiteConfig = {
     linkedin: 'https://www.linkedin.com/company/jcdforwarder/',
     whatsapp: 'https://api.whatsapp.com/send/?phone=%2B8613724246674',
     tiktok: 'https://www.tiktok.com/@alibaba.com_buyercentral',
-    alibabaTrustPass: 'https://jcdforwarder.en.alibaba.com',
+    alibabaTrustPass: 'https://jiechengda.en.alibaba.com/',
   },
 
   metrics: {

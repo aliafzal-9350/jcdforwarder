@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <rect width="800" height="450" fill="#081A36" rx="8"/>
+  <circle cx="140" cy="280" r="8" fill="#38BDF8"/>
+  <text x="140" y="310" text-anchor="middle" fill="#CBD5E1" font-family="sans-serif" font-size="11">SZX / CAN (South)</text>
+  <circle cx="180" cy="180" r="8" fill="#38BDF8"/>
+  <text x="180" y="160" text-anchor="middle" fill="#CBD5E1" font-family="sans-serif" font-size="11">PVG (East China)</text>
+  <circle cx="660" cy="200" r="10" fill="#34D399"/>
+  <text x="660" y="230" text-anchor="middle" fill="#34D399" font-family="sans-serif" font-size="12" font-weight="bold">Destination Hubs</text>
+  <path d="M 140 280 Q 400 30 660 200" fill="none" stroke="#38BDF8" stroke-width="3" stroke-dasharray="8,6"/>
+  <path d="M 180 180 Q 420 50 660 200" fill="none" stroke="#60A5FA" stroke-width="2.5"/>
+</svg>

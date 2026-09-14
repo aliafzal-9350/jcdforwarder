@@ -20,17 +20,26 @@ import {
   Plane,
   Ship,
   Train,
+  Truck,
   Box,
+  Clock,
   Calculator,
   Compass,
   Building2,
   MapPin,
   ExternalLink,
   Award,
-  Sparkles,
   ArrowRight,
+  ChevronRight,
   Globe,
   Layers,
+  Headphones,
+  Search,
+  FileText,
+  ClipboardList,
+  Anchor,
+  Ruler,
+  Scale,
 } from "lucide-react";
 
 export function Navbar() {
@@ -39,8 +48,9 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Dropdown states for desktop
+  // Desktop Mega Menu States
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [activeServiceTab, setActiveServiceTab] = useState<"main" | "country" | "city">("main");
   const [toolsOpen, setToolsOpen] = useState(false);
   const [routesOpen, setRoutesOpen] = useState(false);
   const [originsOpen, setOriginsOpen] = useState(false);
@@ -56,7 +66,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on page transition
+  // Close menus on route navigation
   useEffect(() => {
     setMobileMenuOpen(false);
     setServicesOpen(false);
@@ -150,7 +160,19 @@ export function Navbar() {
 
             {/* Desktop Navigation Links */}
             <div className="hidden lg:flex items-center gap-1 xl:gap-2">
-              {/* Services Dropdown */}
+              {/* Home */}
+              <Link
+                href="/"
+                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                  pathname === "/"
+                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30"
+                    : "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                }`}
+              >
+                Home
+              </Link>
+
+              {/* TABBED SERVICES MEGA MENU (Services, Country & City Architecture) */}
               <div
                 className="relative"
                 onMouseEnter={() => setServicesOpen(true)}
@@ -168,81 +190,346 @@ export function Navbar() {
                 </button>
 
                 {servicesOpen && (
-                  <div className="absolute top-full left-0 w-80 pt-2 animate-in fade-in slide-in-from-top-2 duration-150">
-                    <div className="rounded-2xl bg-white dark:bg-slate-900 shadow-xl border border-slate-200 dark:border-slate-800 p-2 space-y-1">
-                      <Link
-                        href="/services/air-freight"
-                        className="flex items-start gap-3 p-3 rounded-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/40 transition-colors group"
-                      >
-                        <div className="h-9 w-9 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                          <Plane className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold text-slate-900 dark:text-white">
-                            Air Freight &amp; Battery DDP
-                          </div>
-                          <div className="text-xs text-slate-500 dark:text-slate-400">
-                            CAN/SZX express flights &amp; UN38.3 pure battery lines
-                          </div>
-                        </div>
-                      </Link>
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[980px] pt-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50">
+                    <div className="rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                      <div className="grid grid-cols-12 min-h-[420px]">
+                        {/* Left Tabbed Sidebar */}
+                        <div className="col-span-3 bg-slate-50/80 dark:bg-slate-950/60 p-4 border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                          <div className="space-y-1.5">
+                            {/* Tab 1: Main Service */}
+                            <button
+                              onMouseEnter={() => setActiveServiceTab("main")}
+                              onClick={() => setActiveServiceTab("main")}
+                              className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition-all text-left ${
+                                activeServiceTab === "main"
+                                  ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm border border-blue-500/30"
+                                  : "text-slate-700 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-900/40"
+                              }`}
+                            >
+                              <Box className="h-4 w-4 shrink-0 text-blue-600 dark:text-blue-400" />
+                              <span>Main Service</span>
+                            </button>
 
-                      <Link
-                        href="/services/sea-freight-fcl-lcl"
-                        className="flex items-start gap-3 p-3 rounded-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/40 transition-colors group"
-                      >
-                        <div className="h-9 w-9 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                          <Ship className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold text-slate-900 dark:text-white">
-                            Ocean Freight (FCL &amp; LCL)
-                          </div>
-                          <div className="text-xs text-slate-500 dark:text-slate-400">
-                            20GP/40HQ containers &amp; 15-step consolidation SOP
-                          </div>
-                        </div>
-                      </Link>
+                            {/* Tab 2: Country Guide */}
+                            <button
+                              onMouseEnter={() => setActiveServiceTab("country")}
+                              onClick={() => setActiveServiceTab("country")}
+                              className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition-all text-left ${
+                                activeServiceTab === "country"
+                                  ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm border border-blue-500/30"
+                                  : "text-slate-700 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-900/40"
+                              }`}
+                            >
+                              <Globe className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400" />
+                              <span>Country Guide</span>
+                            </button>
 
-                      <Link
-                        href="/services/rail-freight"
-                        className="flex items-start gap-3 p-3 rounded-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/40 transition-colors group"
-                      >
-                        <div className="h-9 w-9 rounded-lg bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                          <Train className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold text-slate-900 dark:text-white">
-                            China-Europe Rail Express
+                            {/* Tab 3: City Guide */}
+                            <button
+                              onMouseEnter={() => setActiveServiceTab("city")}
+                              onClick={() => setActiveServiceTab("city")}
+                              className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition-all text-left ${
+                                activeServiceTab === "city"
+                                  ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm border border-blue-500/30"
+                                  : "text-slate-700 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-900/40"
+                              }`}
+                            >
+                              <MapPin className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                              <span>City Guide</span>
+                            </button>
                           </div>
-                          <div className="text-xs text-slate-500 dark:text-slate-400">
-                            West/Central/East corridors &amp; Yixinou rail lines
-                          </div>
-                        </div>
-                      </Link>
 
-                      <Link
-                        href="/services/amazon-fba-logistics"
-                        className="flex items-start gap-3 p-3 rounded-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/40 transition-colors group"
-                      >
-                        <div className="h-9 w-9 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                          <Box className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold text-slate-900 dark:text-white">
-                            Amazon FBA First-Leg
+                          {/* Left Bottom Expert Card */}
+                          <div className="pt-4 border-t border-slate-200/80 dark:border-slate-800">
+                            <div className="p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/40 space-y-1.5">
+                              <div className="flex items-center gap-2 text-blue-700 dark:text-blue-300 font-bold text-xs">
+                                <Headphones className="h-4 w-4 text-blue-600" />
+                                <span>Find the right service</span>
+                              </div>
+                              <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                                Our logistics experts are here to advise on freight modes and customs.
+                              </p>
+                              <button
+                                onClick={() => openQuoteModal()}
+                                className="inline-flex items-center gap-1 text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline pt-1"
+                              >
+                                <span>Contact our experts &rarr;</span>
+                              </button>
+                            </div>
                           </div>
-                          <div className="text-xs text-slate-500 dark:text-slate-400">
-                            CARP/ISA booking, FNSKU prep &amp; GMA/EPAL pallets
-                          </div>
                         </div>
-                      </Link>
+
+                        {/* Right Content Panel */}
+                        <div className="col-span-9 p-6 flex flex-col justify-between">
+                          {/* PANEL A: MAIN 6 SERVICES */}
+                          {activeServiceTab === "main" && (
+                            <div className="space-y-6 animate-in fade-in duration-150">
+                              {/* 6 Core Services in 2 Columns */}
+                              <div className="grid grid-cols-2 gap-3.5">
+                                {/* Service 1: Air Freight */}
+                                <Link
+                                  href="/services/air-freight"
+                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                >
+                                  <div className="flex items-start gap-3">
+                                    <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:scale-105 transition-transform">
+                                      <Plane className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        Air freight
+                                      </h4>
+                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
+                                        Fast and reliable air cargo shipping worldwide with real-time tracking.
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                </Link>
+
+                                {/* Service 2: Rail Freight */}
+                                <Link
+                                  href="/services/rail-freight"
+                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                >
+                                  <div className="flex items-start gap-3">
+                                    <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 group-hover:scale-105 transition-transform">
+                                      <Train className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        Rail freight
+                                      </h4>
+                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
+                                        Secure and efficient rail transport across major international routes.
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                </Link>
+
+                                {/* Service 3: Sea Freight */}
+                                <Link
+                                  href="/services/sea-freight"
+                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                >
+                                  <div className="flex items-start gap-3">
+                                    <div className="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-transform">
+                                      <Ship className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        Sea freight
+                                      </h4>
+                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
+                                        Cost-effective ocean freight solutions for FCL and LCL shipments.
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                </Link>
+
+                                {/* Service 4: Trucking Freight */}
+                                <Link
+                                  href="/services/trucking-freight"
+                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                >
+                                  <div className="flex items-start gap-3">
+                                    <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover:scale-105 transition-transform">
+                                      <Truck className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        Trucking freight
+                                      </h4>
+                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
+                                        Flexible inland transport and cross-border trucking solutions.
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                </Link>
+
+                                {/* Service 5: DDP Freight */}
+                                <Link
+                                  href="/services/ddp-shipping"
+                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                >
+                                  <div className="flex items-start gap-3">
+                                    <div className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 group-hover:scale-105 transition-transform">
+                                      <Box className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        DDP freight
+                                      </h4>
+                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
+                                        Door-to-door delivery with duties and taxes paid. Hassle-free.
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                </Link>
+
+                                {/* Service 6: Express Courier */}
+                                <Link
+                                  href="/services/express-courier"
+                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                >
+                                  <div className="flex items-start gap-3">
+                                    <div className="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 group-hover:scale-105 transition-transform">
+                                      <Clock className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                        Express Courier Service
+                                      </h4>
+                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
+                                        Time-sensitive delivery with global express courier partners.
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                </Link>
+                              </div>
+
+                              {/* Bottom Trust Feature Bar (Exact match to reference) */}
+                              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-3 gap-4">
+                                <div className="flex items-center gap-2.5">
+                                  <ShieldCheck className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0" />
+                                  <div>
+                                    <h5 className="text-xs font-bold text-slate-900 dark:text-white">Reliable &amp; Secure</h5>
+                                    <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">
+                                      Your cargo is protected every step of the way.
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div className="flex items-center gap-2.5">
+                                  <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0" />
+                                  <div>
+                                    <h5 className="text-xs font-bold text-slate-900 dark:text-white">On-time Delivery</h5>
+                                    <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">
+                                      Punctual delivery with real-time updates.
+                                    </p>
+                                  </div>
+                                </div>
+
+                                <div className="flex items-center gap-2.5">
+                                  <Headphones className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0" />
+                                  <div>
+                                    <h5 className="text-xs font-bold text-slate-900 dark:text-white">24/7 Expert Support</h5>
+                                    <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">
+                                      Our team is here to support you anytime.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* PANEL B: COUNTRY GUIDE */}
+                          {activeServiceTab === "country" && (
+                            <div className="space-y-4 animate-in fade-in duration-150">
+                              <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+                                <div>
+                                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                                    Global Shipping Destinations &amp; DDP Routes
+                                  </h4>
+                                  <p className="text-xs text-slate-500">
+                                    Customs clearance guidelines, transit times, and port routing for 44+ countries.
+                                  </p>
+                                </div>
+                                <Link
+                                  href="/routes"
+                                  className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                                >
+                                  <span>View All 44+ Routes</span>
+                                  <ArrowRight className="h-3 w-3" />
+                                </Link>
+                              </div>
+
+                              <div className="grid grid-cols-3 gap-2.5">
+                                {topTierRoutes.map((route) => (
+                                  <Link
+                                    key={route.code}
+                                    href={`/routes/${route.slug}`}
+                                    className="p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors flex items-center justify-between group"
+                                  >
+                                    <div>
+                                      <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                                        {route.name}
+                                      </div>
+                                      <div className="text-[10px] text-slate-400">
+                                        {route.region}
+                                      </div>
+                                    </div>
+                                    <span className="font-mono text-[10px] text-slate-400 font-semibold">
+                                      {route.code}
+                                    </span>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* PANEL C: CITY GUIDE */}
+                          {activeServiceTab === "city" && (
+                            <div className="space-y-4 animate-in fade-in duration-150">
+                              <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+                                <div>
+                                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                                    China Origin Manufacturing Hubs &amp; Consolidation
+                                  </h4>
+                                  <p className="text-xs text-slate-500">
+                                    Local factory pickup fleets, bonded CFS warehouses, and port gate-in terminals.
+                                  </p>
+                                </div>
+                                <Link
+                                  href="/origins"
+                                  className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                                >
+                                  <span>View All 7 Hubs</span>
+                                  <ArrowRight className="h-3 w-3" />
+                                </Link>
+                              </div>
+
+                              <div className="grid grid-cols-2 gap-3">
+                                {ORIGIN_HUBS.map((hub) => (
+                                  <Link
+                                    key={hub.id}
+                                    href={`/origins/${hub.slug}`}
+                                    className="p-3 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors flex items-center justify-between group"
+                                  >
+                                    <div>
+                                      <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                                        <span>{hub.name}</span>
+                                        {hub.id === "shenzhen" && (
+                                          <span className="bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-[10px] px-1.5 py-0.2 rounded font-bold">
+                                            HQ Center
+                                          </span>
+                                        )}
+                                      </div>
+                                      <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                                        {hub.chineseName} • {hub.province} Province
+                                      </div>
+                                    </div>
+                                    <span className="text-[10px] font-mono text-blue-600 dark:text-blue-400 font-bold">
+                                      {hub.pickup.averageDispatchHours}h dispatch
+                                    </span>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Tools Dropdown */}
+              {/* TOOLS MEGA MENU (All 10 Working Tools) */}
               <div
                 className="relative"
                 onMouseEnter={() => setToolsOpen(true)}
@@ -260,66 +547,200 @@ export function Navbar() {
                 </button>
 
                 {toolsOpen && (
-                  <div className="absolute top-full left-0 w-80 pt-2 animate-in fade-in slide-in-from-top-2 duration-150">
-                    <div className="rounded-2xl bg-white dark:bg-slate-900 shadow-xl border border-slate-200 dark:border-slate-800 p-2 space-y-1">
-                      <Link
-                        href="/tools/container-loading-calculator"
-                        className="flex items-start gap-3 p-3 rounded-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/40 transition-colors group"
-                      >
-                        <div className="h-9 w-9 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
-                          <Layers className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold text-slate-900 dark:text-white">
-                            3D Container Simulator
-                          </div>
-                          <div className="text-xs text-slate-500 dark:text-slate-400">
-                            Interactive 3D cargo packing &amp; CBM utilization
-                          </div>
-                        </div>
-                      </Link>
-
-                      <Link
-                        href="/tools/volumetric-calculator"
-                        className="flex items-start gap-3 p-3 rounded-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/40 transition-colors group"
-                      >
-                        <div className="h-9 w-9 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                          <Calculator className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold text-slate-900 dark:text-white">
-                            Volumetric Weight Calc
-                          </div>
-                          <div className="text-xs text-slate-500 dark:text-slate-400">
-                            Compare 1:6000 air vs 1:5000 courier &amp; CBM
-                          </div>
-                        </div>
-                      </Link>
-
-                      <Link
-                        href="/tools/incoterms-selector"
-                        className="flex items-start gap-3 p-3 rounded-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/40 transition-colors group"
-                      >
-                        <div className="h-9 w-9 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                          <Compass className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold text-slate-900 dark:text-white">
-                            Incoterms 2020 Engine
-                          </div>
-                          <div className="text-xs text-slate-500 dark:text-slate-400">
-                            EXW, FOB, CIF, DDU vs DDP cost &amp; risk matrix
-                          </div>
-                        </div>
-                      </Link>
-
-                      <div className="border-t border-slate-100 dark:border-slate-800 pt-2 px-2">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[760px] pt-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50">
+                    <div className="rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 p-5">
+                      <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 mb-3">
+                        <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                          <Calculator className="h-4 w-4 text-blue-600" />
+                          Logistics Calculators &amp; Web Utilities (10 Working Tools)
+                        </span>
                         <Link
                           href="/tools"
-                          className="flex items-center justify-between text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline py-1"
+                          className="text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline"
                         >
-                          <span>Explore All Logistics Tools</span>
-                          <ArrowRight className="h-3.5 w-3.5" />
+                          Explore All Tools &rarr;
+                        </Link>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2.5">
+                        {/* Tool 1 */}
+                        <Link
+                          href="/tools/volumetric-calculator"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 shrink-0">
+                            <Scale className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                              Volumetric Weight Calculator
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              Air 6000 vs Express 5000 &amp; CBM
+                            </div>
+                          </div>
+                        </Link>
+
+                        {/* Tool 2 */}
+                        <Link
+                          href="/tools/tracking"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 shrink-0">
+                            <Search className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                              Cargo &amp; Express Tracking
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              DHL, FedEx, UPS &amp; JCD NVOCC Waybills
+                            </div>
+                          </div>
+                        </Link>
+
+                        {/* Tool 3 */}
+                        <Link
+                          href="/tools/container-loading-calculator"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 shrink-0">
+                            <Box className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                              3D Container Loading Planner
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              Interactive 3D 20GP/40HQ simulation
+                            </div>
+                          </div>
+                        </Link>
+
+                        {/* Tool 4 */}
+                        <Link
+                          href="/tools/flight-route-calculator"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 shrink-0">
+                            <Plane className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                              Flight Route &amp; Transit Calc
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              Air distances &amp; flight schedules
+                            </div>
+                          </div>
+                        </Link>
+
+                        {/* Tool 5 */}
+                        <Link
+                          href="/tools/shipping-unit-converter"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 shrink-0">
+                            <Ruler className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                              Shipping Unit Converter
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              kg, lbs, CBM, cu ft, cm &amp; inches
+                            </div>
+                          </div>
+                        </Link>
+
+                        {/* Tool 6 */}
+                        <Link
+                          href="/tools/china-hs-code"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 shrink-0">
+                            <ShieldCheck className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                              China HS Code &amp; Tariff Finder
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              Customs codes &amp; export VAT rebates
+                            </div>
+                          </div>
+                        </Link>
+
+                        {/* Tool 7 */}
+                        <Link
+                          href="/tools/proforma-invoice-generator"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 shrink-0">
+                            <FileText className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                              Proforma Invoice Generator
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              Commercial trade invoice &amp; PDF export
+                            </div>
+                          </div>
+                        </Link>
+
+                        {/* Tool 8 */}
+                        <Link
+                          href="/tools/packing-list-generator"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 shrink-0">
+                            <ClipboardList className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                              Packing List Generator
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              Carton tally, weights &amp; PDF manifest
+                            </div>
+                          </div>
+                        </Link>
+
+                        {/* Tool 9 */}
+                        <Link
+                          href="/tools/seaports"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-cyan-50 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 shrink-0">
+                            <Anchor className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                              World Seaports Directory
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              UN/LOCODE registry &amp; sailing transits
+                            </div>
+                          </div>
+                        </Link>
+
+                        {/* Tool 10 */}
+                        <Link
+                          href="/tools/incoterms"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 shrink-0">
+                            <Compass className="h-4 w-4" />
+                          </div>
+                          <div>
+                            <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                              Incoterms 2020 Matrix
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              All 11 terms comparison &amp; risks
+                            </div>
+                          </div>
                         </Link>
                       </div>
                     </div>
@@ -327,7 +748,7 @@ export function Navbar() {
                 )}
               </div>
 
-              {/* Country Routes Dropdown */}
+              {/* Country Routes */}
               <div
                 className="relative"
                 onMouseEnter={() => setRoutesOpen(true)}
@@ -345,7 +766,7 @@ export function Navbar() {
                 </button>
 
                 {routesOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[520px] pt-2 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[520px] pt-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50">
                     <div className="rounded-2xl bg-white dark:bg-slate-900 shadow-xl border border-slate-200 dark:border-slate-800 p-4">
                       <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 mb-3">
                         <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
@@ -382,7 +803,7 @@ export function Navbar() {
                           href="/routes"
                           className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
                         >
-                          <span>Explore All 44 Country Routes</span>
+                          <span>Explore All 44 Routes</span>
                           <ArrowRight className="h-3 w-3" />
                         </Link>
                       </div>
@@ -391,7 +812,7 @@ export function Navbar() {
                 )}
               </div>
 
-              {/* Origin Hubs Dropdown */}
+              {/* Origin Hubs */}
               <div
                 className="relative"
                 onMouseEnter={() => setOriginsOpen(true)}
@@ -409,7 +830,7 @@ export function Navbar() {
                 </button>
 
                 {originsOpen && (
-                  <div className="absolute top-full left-0 w-80 pt-2 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="absolute top-full left-0 w-80 pt-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50">
                     <div className="rounded-2xl bg-white dark:bg-slate-900 shadow-xl border border-slate-200 dark:border-slate-800 p-2 space-y-1">
                       {ORIGIN_HUBS.map((hub) => (
                         <Link
@@ -450,7 +871,7 @@ export function Navbar() {
                 )}
               </div>
 
-              {/* About Us Link */}
+              {/* About Us */}
               <Link
                 href="/about-us"
                 className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
@@ -462,7 +883,7 @@ export function Navbar() {
                 About Us
               </Link>
 
-              {/* Contact Link */}
+              {/* Contact */}
               <Link
                 href="/contact"
                 className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
@@ -475,13 +896,13 @@ export function Navbar() {
               </Link>
             </div>
 
-            {/* Right Action: Quick "Get Instant Quote" Button */}
+            {/* Right Action: Get Instant Quote Button */}
             <div className="hidden lg:flex items-center gap-3">
               <button
                 onClick={() => openQuoteModal()}
-                className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-blue-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="flex items-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-orange-600/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
-                <Sparkles className="h-4 w-4" />
+                <Calculator className="h-4 w-4" />
                 <span>Instant Quote</span>
               </button>
             </div>
@@ -490,7 +911,7 @@ export function Navbar() {
             <div className="flex lg:hidden items-center gap-2">
               <button
                 onClick={() => openQuoteModal()}
-                className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white shadow-sm"
+                className="rounded-lg bg-orange-600 px-3 py-1.5 text-xs font-bold text-white shadow-sm"
               >
                 Quote
               </button>
@@ -512,16 +933,16 @@ export function Navbar() {
         {/* 3. MOBILE RESPONSIVE MENU DRAWER */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-4 animate-in slide-in-from-top-4 duration-200 max-h-[85vh] overflow-y-auto">
-            {/* Quick Actions in Mobile Drawer */}
+            {/* Quick Actions */}
             <div className="grid grid-cols-2 gap-2 pt-2">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   openQuoteModal();
                 }}
-                className="flex items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-bold text-white shadow-sm"
+                className="flex items-center justify-center gap-1.5 rounded-xl bg-orange-600 px-4 py-2.5 text-xs font-bold text-white shadow-sm"
               >
-                <Sparkles className="h-4 w-4" />
+                <Calculator className="h-4 w-4" />
                 <span>Get Instant Quote</span>
               </button>
 
@@ -536,7 +957,7 @@ export function Navbar() {
               </a>
             </div>
 
-            {/* Services Accordion */}
+            {/* Services Accordion (All 6 Services) */}
             <div className="border-t border-slate-100 dark:border-slate-800 pt-3">
               <button
                 onClick={() =>
@@ -544,7 +965,7 @@ export function Navbar() {
                 }
                 className="flex w-full items-center justify-between text-sm font-bold text-slate-900 dark:text-white py-1"
               >
-                <span>Core Freight Services</span>
+                <span>Core Freight Services (6 Modes)</span>
                 <ChevronDown
                   className={`h-4 w-4 transition-transform ${
                     mobileSection === "services" ? "rotate-180" : ""
@@ -554,35 +975,29 @@ export function Navbar() {
 
               {mobileSection === "services" && (
                 <div className="mt-2 pl-2 space-y-2 text-xs border-l-2 border-blue-500">
-                  <Link
-                    href="/services/air-freight"
-                    className="block py-1 text-slate-600 dark:text-slate-300 font-medium"
-                  >
-                    ✈️ Air Freight &amp; Battery DDP (CAN / SZX)
+                  <Link href="/services/air-freight" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    ✈️ Air Freight (Direct Flights &amp; Battery DDP)
                   </Link>
-                  <Link
-                    href="/services/sea-freight-fcl-lcl"
-                    className="block py-1 text-slate-600 dark:text-slate-300 font-medium"
-                  >
-                    🚢 Ocean Freight (20GP / 40HQ FCL &amp; LCL)
+                  <Link href="/services/sea-freight" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    🚢 Sea Freight (20GP / 40HQ FCL &amp; LCL)
                   </Link>
-                  <Link
-                    href="/services/rail-freight"
-                    className="block py-1 text-slate-600 dark:text-slate-300 font-medium"
-                  >
-                    🚆 China-Europe Railway Express (CR Express)
+                  <Link href="/services/rail-freight" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    🚆 Rail Freight (China-Europe Railway Express)
                   </Link>
-                  <Link
-                    href="/services/amazon-fba-logistics"
-                    className="block py-1 text-slate-600 dark:text-slate-300 font-medium"
-                  >
-                    📦 Amazon FBA First-Leg Logistics &amp; Prep
+                  <Link href="/services/ddp-shipping" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    📦 DDP Shipping (Door-to-Door All Duties Paid)
+                  </Link>
+                  <Link href="/services/trucking-freight" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    🚛 Trucking Freight (Inland Cartage &amp; TIR Linehaul)
+                  </Link>
+                  <Link href="/services/express-courier" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    ⏱️ Express Courier (DHL / FedEx / UPS Priority)
                   </Link>
                 </div>
               )}
             </div>
 
-            {/* Tools Accordion */}
+            {/* Tools Accordion (All 10 Tools) */}
             <div className="border-t border-slate-100 dark:border-slate-800 pt-3">
               <button
                 onClick={() =>
@@ -590,7 +1005,7 @@ export function Navbar() {
                 }
                 className="flex w-full items-center justify-between text-sm font-bold text-slate-900 dark:text-white py-1"
               >
-                <span>Interactive Logistics Tools</span>
+                <span>Interactive Logistics Tools (10 Tools)</span>
                 <ChevronDown
                   className={`h-4 w-4 transition-transform ${
                     mobileSection === "tools" ? "rotate-180" : ""
@@ -599,94 +1014,88 @@ export function Navbar() {
               </button>
 
               {mobileSection === "tools" && (
-                <div className="mt-2 pl-2 space-y-2 text-xs border-l-2 border-indigo-500">
-                  <Link
-                    href="/tools/container-loading-calculator"
-                    className="block py-1 text-slate-600 dark:text-slate-300 font-medium"
-                  >
-                    🧊 3D Container Loading Simulator
+                <div className="mt-2 pl-2 space-y-2 text-xs border-l-2 border-blue-500">
+                  <Link href="/tools/volumetric-calculator" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    ⚖️ Volumetric Weight Calculator
                   </Link>
-                  <Link
-                    href="/tools/volumetric-calculator"
-                    className="block py-1 text-slate-600 dark:text-slate-300 font-medium"
-                  >
-                    📐 Volumetric Weight Calculator
+                  <Link href="/tools/tracking" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    🔍 Cargo &amp; Express Tracking
                   </Link>
-                  <Link
-                    href="/tools/incoterms-selector"
-                    className="block py-1 text-slate-600 dark:text-slate-300 font-medium"
-                  >
-                    ⚖️ Incoterms 2020 Decision Engine
+                  <Link href="/tools/container-loading-calculator" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    📦 3D Container Loading Simulator
                   </Link>
-                  <Link
-                    href="/tools"
-                    className="block py-1 text-blue-600 font-bold"
-                  >
-                    ➔ View All Calculation Tools
+                  <Link href="/tools/flight-route-calculator" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    ✈️ Flight Transit &amp; Route Calculator
+                  </Link>
+                  <Link href="/tools/shipping-unit-converter" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    📏 Shipping Unit Converter
+                  </Link>
+                  <Link href="/tools/china-hs-code" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    🛡️ China HS Code &amp; Tariff Finder
+                  </Link>
+                  <Link href="/tools/proforma-invoice-generator" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    📄 Proforma Invoice Generator (PDF)
+                  </Link>
+                  <Link href="/tools/packing-list-generator" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    📋 Packing List Generator (PDF)
+                  </Link>
+                  <Link href="/tools/seaports" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    ⚓ World Seaports Directory
+                  </Link>
+                  <Link href="/tools/incoterms" className="block py-1 text-slate-600 dark:text-slate-300 font-medium">
+                    🧭 Incoterms 2020 Matrix
                   </Link>
                 </div>
               )}
             </div>
 
-            {/* Origin Hubs */}
+            {/* Country Routes Accordion */}
             <div className="border-t border-slate-100 dark:border-slate-800 pt-3">
               <button
                 onClick={() =>
-                  setMobileSection(mobileSection === "origins" ? null : "origins")
+                  setMobileSection(mobileSection === "routes" ? null : "routes")
                 }
                 className="flex w-full items-center justify-between text-sm font-bold text-slate-900 dark:text-white py-1"
               >
-                <span>7 Chinese Sourcing Hubs</span>
+                <span>Country Shipping Routes (44 Lanes)</span>
                 <ChevronDown
                   className={`h-4 w-4 transition-transform ${
-                    mobileSection === "origins" ? "rotate-180" : ""
+                    mobileSection === "routes" ? "rotate-180" : ""
                   }`}
                 />
               </button>
 
-              {mobileSection === "origins" && (
-                <div className="mt-2 grid grid-cols-2 gap-2 text-xs">
-                  {ORIGIN_HUBS.map((hub) => (
-                    <Link
-                      key={hub.id}
-                      href={`/origins/${hub.slug}`}
-                      className="p-2 rounded bg-slate-50 dark:bg-slate-800/60 text-slate-700 dark:text-slate-200"
-                    >
-                      <div className="font-bold">{hub.name}</div>
-                      <div className="text-[10px] text-slate-500">{hub.seaports[0]?.name || "Port"}</div>
-                    </Link>
-                  ))}
+              {mobileSection === "routes" && (
+                <div className="mt-2 pl-2 space-y-1 text-xs border-l-2 border-blue-500">
+                  <div className="grid grid-cols-2 gap-1 py-1">
+                    {topTierRoutes.map((r) => (
+                      <Link
+                        key={r.code}
+                        href={`/routes/${r.slug}`}
+                        className="py-1 text-slate-600 dark:text-slate-300 font-medium hover:text-blue-600"
+                      >
+                        {r.name} ({r.code})
+                      </Link>
+                    ))}
+                  </div>
+                  <Link href="/routes" className="block py-1.5 text-blue-600 font-bold hover:underline">
+                    View All 44 Country Routes &rarr;
+                  </Link>
                 </div>
               )}
             </div>
 
-            {/* Key Routes Quick Links */}
-            <div className="border-t border-slate-100 dark:border-slate-800 pt-3">
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">
-                Popular Destination Routes
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {topTierRoutes.slice(0, 8).map((route) => (
-                  <Link
-                    key={route.code}
-                    href={`/routes/${route.slug}`}
-                    className="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-200"
-                  >
-                    {route.code} - {route.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* About & Trust Footer inside drawer */}
-            <div className="border-t border-slate-100 dark:border-slate-800 pt-3 text-xs text-slate-500 space-y-1">
-              <div>
-                NVOCC Registration:{" "}
-                <strong className="text-slate-800 dark:text-slate-200 font-mono">
-                  {SITE_CONFIG.credentials.nvoccLicenseNumber}
-                </strong>
-              </div>
-              <div>Shenzhen HQ Warehouse: Bao&apos;an Xinhe Community</div>
+            {/* General Links */}
+            <div className="border-t border-slate-100 dark:border-slate-800 pt-3 space-y-2 text-sm font-semibold">
+              <Link href="/origins" className="block py-1 text-slate-700 dark:text-slate-200">
+                China Origin Hubs
+              </Link>
+              <Link href="/about-us" className="block py-1 text-slate-700 dark:text-slate-200">
+                About JCD Forwarder
+              </Link>
+              <Link href="/contact" className="block py-1 text-slate-700 dark:text-slate-200">
+                Contact &amp; Support
+              </Link>
             </div>
           </div>
         )}

@@ -38,7 +38,7 @@ import {
   MessageCircle,
   Mail,
   ChevronRight,
-  Sparkles,
+  Award,
 } from 'lucide-react';
 
 interface OriginPageProps {
@@ -127,23 +127,6 @@ export default async function OriginPage({ params }: OriginPageProps) {
       <JsonLd schema={breadcrumbSchema} />
 
       <main className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
-        {/* Top Trust Bar */}
-        <div className="bg-slate-900 border-b border-slate-800 text-slate-300 text-xs py-2 px-4">
-          <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>
-                Licensed NVOCC Carrier: <strong>GD20240307220907</strong> | 10+ Years Operational Heritage (Est. 2015)
-              </span>
-            </div>
-            <div className="flex items-center gap-4 text-slate-400">
-              <span>Alibaba TrustPass ★ 4.7 / 5.0</span>
-              <span className="hidden sm:inline">•</span>
-              <span>Direct Factory Drayage Dispatch</span>
-            </div>
-          </div>
-        </div>
-
         {/* Breadcrumb Navigation */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-xs text-slate-500">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 flex-wrap">
@@ -174,7 +157,7 @@ export default async function OriginPage({ params }: OriginPageProps) {
                   </Badge>
                   {origin.isHeadquarters ? (
                     <Badge className="bg-emerald-500 text-slate-950 font-bold px-3 py-1">
-                      <Sparkles className="w-3.5 h-3.5 mr-1" />
+                      <Award className="w-3.5 h-3.5 mr-1" />
                       Global Corporate Headquarters & Flagship Facility
                     </Badge>
                   ) : (
@@ -591,7 +574,7 @@ export default async function OriginPage({ params }: OriginPageProps) {
         </section>
 
         {/* SECTION 4: CONVERSION CTA STRIP */}
-        <section className="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white py-14 px-4 sm:px-6 lg:px-8">
+        <section className="bg-slate-900 border-t border-slate-800 text-white py-14 px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto text-center space-y-6">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Ready to Ship Inventory from {origin.name}?

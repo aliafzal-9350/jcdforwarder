@@ -14,7 +14,7 @@ import {
   Train,
   Zap,
   ArrowRight,
-  Sparkles,
+  Calculator,
   MessageCircle,
   Filter,
   CheckCircle2,
@@ -64,7 +64,7 @@ export default function RoutesIndexPage() {
 
             <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
               Global Shipping Routes <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400">
+              <span className="text-sky-400">
                 Direct DDP Delivery from China
               </span>
             </h1>
@@ -85,55 +85,64 @@ export default function RoutesIndexPage() {
               <Search className="absolute left-3.5 top-3 h-4 w-4 text-slate-400" />
               <input
                 type="text"
+                placeholder="Search destination country, 2-letter ISO code, or trading hub..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search destination by country name, ISO code (e.g. US, DE, GB)..."
-                className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 pl-10 pr-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20 shadow-sm"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            {/* Total Results Count */}
-            <div className="text-xs font-mono font-semibold text-slate-500 shrink-0">
-              Showing <strong className="text-blue-600 dark:text-blue-400">{filteredRoutes.length}</strong> of {TARGET_ROUTES.length} Routes
+            {/* Region Filter Buttons */}
+            <div className="flex flex-wrap gap-1.5 w-full sm:w-auto">
+              {regions.map((reg) => (
+                <button
+                  key={reg}
+                  onClick={() => setSelectedRegion(reg)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                    selectedRegion === reg
+                      ? "bg-blue-600 text-white"
+                      : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-blue-400"
+                  }`}
+                >
+                  {reg}
+                </button>
+              ))}
             </div>
-          </div>
-
-          {/* Region Filter Pills */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none">
-            {regions.map((reg) => (
-              <button
-                key={reg}
-                onClick={() => setSelectedRegion(reg)}
-                className={`px-3.5 py-1.5 rounded-lg font-bold shrink-0 transition-all ${
-                  selectedRegion === reg
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-700"
-                }`}
-              >
-                {reg}
-              </button>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* 3. ROUTES CARDS GRID */}
+      {/* 3. ROUTES GRID */}
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {filteredRoutes.length === 0 ? (
-          <div className="text-center py-20 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-8">
-            <Globe className="h-12 w-12 text-slate-400 mx-auto mb-3 opacity-60" />
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-              No matching shipping routes found
-            </h3>
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+              Direct Destination Hubs
+            </h2>
             <p className="text-xs text-slate-500 mt-1">
-              Try adjusting your search keyword or selecting a different geographical region.
+              Showing {filteredRoutes.length} of {TARGET_ROUTES.length} global trade lanes
+            </p>
+          </div>
+          <span className="text-xs font-mono text-blue-600 dark:text-blue-400 font-semibold">
+            All Incoterms: EXW • FOB • CIF • DDP • DDU
+          </span>
+        </div>
+
+        {filteredRoutes.length === 0 ? (
+          <div className="text-center py-20 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
+            <Globe className="h-12 w-12 mx-auto text-slate-400" />
+            <div className="text-base font-bold text-slate-800 dark:text-slate-200">
+              No country routes found matching &quot;{searchQuery}&quot;
+            </div>
+            <p className="text-xs text-slate-500 max-w-md mx-auto">
+              We handle freight to over 120 destinations via charter and ocean relay. Contact our dispatch desk for a custom quotation.
             </p>
             <button
               onClick={() => {
                 setSearchQuery("");
                 setSelectedRegion("All");
               }}
-              className="mt-4 px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-bold"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-bold hover:bg-blue-700"
             >
               Reset Filters
             </button>
@@ -204,7 +213,7 @@ export default function RoutesIndexPage() {
                       {route.region === "Europe" && (
                         <span title="CR Express Rail Available"><Train className="h-3.5 w-3.5 text-amber-500" /></span>
                       )}
-                      <span title="Express Courier Available"><Zap className="h-3.5 w-3.5 text-indigo-500" /></span>
+                      <span title="Express Courier Available"><Zap className="h-3.5 w-3.5 text-orange-500" /></span>
                     </div>
                   </div>
                 </div>
@@ -225,7 +234,7 @@ export default function RoutesIndexPage() {
                         destinationSlug: route.slug,
                       })
                     }
-                    className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-sm transition-colors"
+                    className="px-3.5 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold shadow-sm transition-colors"
                   >
                     Quote
                   </button>
@@ -248,9 +257,9 @@ export default function RoutesIndexPage() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={() => openQuoteModal()}
-              className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 px-6 py-3.5 text-sm font-bold shadow-md transition-all hover:scale-105"
+              className="flex items-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 px-6 py-3.5 text-sm font-bold shadow-md transition-all hover:scale-105"
             >
-              <Sparkles className="h-4 w-4" />
+              <Calculator className="h-4 w-4" />
               <span>Launch Quote Wizard</span>
             </button>
             <a

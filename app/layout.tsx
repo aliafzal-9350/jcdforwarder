@@ -7,6 +7,7 @@ import { QuoteModalProvider } from "@/components/quote/QuoteModalContext";
 import { QuoteWizardModal } from "@/components/quote/QuoteWizardModal";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SupportChatWidget } from "@/components/chat/SupportChatWidget";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -78,6 +79,7 @@ export default function RootLayout({
           <main className="flex-1 w-full">{children}</main>
           <Footer />
           <QuoteWizardModal />
+          <SupportChatWidget />
         </QuoteModalProvider>
       </body>
     </html>

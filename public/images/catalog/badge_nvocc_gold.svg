@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <circle cx="200" cy="200" r="170" fill="#0F2C59" stroke="#D97706" stroke-width="8"/>
+  <circle cx="200" cy="200" r="145" fill="none" stroke="#FBBF24" stroke-width="3" stroke-dasharray="6,6"/>
+  <text x="200" y="160" text-anchor="middle" fill="#FBBF24" font-family="sans-serif" font-size="20" font-weight="bold">GOVERNMENT NVOCC</text>
+  <text x="200" y="200" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold">GD20240307220907</text>
+  <text x="200" y="240" text-anchor="middle" fill="#93C5FD" font-family="sans-serif" font-size="13">DEPT. OF TRANSPORTATION</text>
+</svg>

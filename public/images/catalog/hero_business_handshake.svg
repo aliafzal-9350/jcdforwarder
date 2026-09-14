@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#0F2C59"/>
+  <circle cx="400" cy="240" r="140" fill="#081A36" stroke="#2563EB" stroke-width="3"/>
+  <path d="M310 240 L370 200 L420 240 L490 200" stroke="#38BDF8" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <path d="M310 270 L370 240 L430 270 L490 230" stroke="#60A5FA" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <text x="400" y="60" text-anchor="middle" fill="#38BDF8" font-family="sans-serif" font-size="20" font-weight="bold">STRATEGIC LONG-TERM TRADE PARTNERSHIPS</text>
+</svg>

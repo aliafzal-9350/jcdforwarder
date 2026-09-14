@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#081A36"/>
+  <line x1="150" y1="100" x2="150" y2="450" stroke="#D97706" stroke-width="10"/>
+  <line x1="300" y1="100" x2="300" y2="450" stroke="#D97706" stroke-width="10"/>
+  <line x1="100" y1="120" x2="650" y2="120" stroke="#D97706" stroke-width="12"/>
+  <rect x="400" y="300" width="120" height="45" fill="#2563EB" rx="3"/>
+  <rect x="400" y="350" width="120" height="45" fill="#059669" rx="3"/>
+  <rect x="530" y="350" width="120" height="45" fill="#DC2626" rx="3"/>
+  <text x="400" y="60" text-anchor="middle" fill="#FBBF24" font-family="sans-serif" font-size="20" font-weight="bold">SEAPORT GANTRY CRANE STEVEDORING</text>
+</svg>

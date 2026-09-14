@@ -16,7 +16,7 @@ import {
   MessageCircle,
   FileText,
   Anchor,
-  Sparkles,
+  Calculator,
   Calendar,
   Building2,
   Check,
@@ -211,7 +211,7 @@ export default function SeaFreightPage() {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
               Ocean Freight FCL &amp; <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400">
+              <span className="text-sky-400">
                 LCL Consolidation
               </span>
             </h1>
@@ -223,9 +223,9 @@ export default function SeaFreightPage() {
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
                 onClick={() => openQuoteModal({ serviceType: "sea-ddp-fast" })}
-                className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/30 transition-all hover:scale-[1.02]"
+                className="flex items-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-600/25 transition-all hover:scale-[1.02]"
               >
-                <Sparkles className="h-4 w-4" />
+                <Calculator className="h-4 w-4" />
                 <span>Get Sea Freight Quote</span>
               </button>
 
@@ -451,7 +451,7 @@ export default function SeaFreightPage() {
                     className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs flex flex-col justify-between"
                   >
                     <div>
-                      <span className="text-sm font-mono font-bold text-indigo-600 dark:text-indigo-400 block mb-1">
+                      <span className="text-sm font-mono font-bold text-cyan-600 dark:text-cyan-400 block mb-1">
                         Phase {step.step}
                       </span>
                       <div className="font-bold text-slate-900 dark:text-white mb-1">
@@ -481,9 +481,9 @@ export default function SeaFreightPage() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={() => openQuoteModal({ serviceType: "sea-ddp-fast" })}
-              className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 px-6 py-3.5 text-sm font-bold shadow-md transition-all hover:scale-105"
+              className="flex items-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 px-6 py-3.5 text-sm font-bold shadow-md transition-all hover:scale-105"
             >
-              <Sparkles className="h-4 w-4" />
+              <Calculator className="h-4 w-4" />
               <span>Launch Quote Wizard</span>
             </button>
             <a

@@ -15,6 +15,7 @@ import {
   createFaqPageSchema,
   createBreadcrumbSchema,
 } from '@/components/seo/JsonLd';
+import { DownloadCatalogButton } from '@/components/routes/DownloadCatalogButton';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -156,23 +157,6 @@ export default async function RoutePage({ params }: RoutePageProps) {
       <JsonLd schema={breadcrumbSchema} />
 
       <main className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
-        {/* Top Trust Notification Bar */}
-        <div className="bg-slate-900 border-b border-slate-800 text-slate-300 text-xs py-2 px-4">
-          <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>
-                Verified NVOCC License: <strong>GD20240307220907</strong> | Guangdong Dept. of Transportation
-              </span>
-            </div>
-            <div className="flex items-center gap-4 text-slate-400">
-              <span>Alibaba TrustPass: ★ 4.7 / 5.0 (48+ Reviews)</span>
-              <span className="hidden sm:inline">•</span>
-              <span className="hidden sm:inline">Dispatch SLA: ≤ 2-Hour Average Response</span>
-            </div>
-          </div>
-        </div>
-
         {/* Breadcrumb Navigation */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 text-xs text-slate-500">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 flex-wrap">
@@ -263,6 +247,7 @@ export default async function RoutePage({ params }: RoutePageProps) {
                     <MessageCircle className="w-5 h-5" />
                     Instant WhatsApp Quote (+86 137 2424 6674)
                   </a>
+                  <DownloadCatalogButton slug={route.slug} countryName={route.name} />
                   <a
                     href={`mailto:David@JCDforwarder.com?subject=${emailSubject}`}
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3.5 border border-slate-600 transition-colors"
@@ -691,7 +676,7 @@ export default async function RoutePage({ params }: RoutePageProps) {
         </section>
 
         {/* SECTION 5: BOTTOM CONVERSION CTA BANNER */}
-        <section className="bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-900 text-white py-14 px-4 sm:px-6 lg:px-8">
+        <section className="bg-slate-900 border-t border-slate-800 text-white py-14 px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto text-center space-y-6">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
               Ready to Ship from China to {route.name}?

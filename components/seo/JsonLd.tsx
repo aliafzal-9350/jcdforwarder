@@ -153,7 +153,7 @@ export function createLocalBusinessSchema(origin?: OriginHub) {
       },
     ],
     sameAs: [
-      'https://jcdforwarder.en.alibaba.com',
+      'https://jiechengda.en.alibaba.com/',
       'https://www.linkedin.com/company/jcdforwarder',
     ],
   };

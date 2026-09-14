@@ -27,7 +27,6 @@ import {
   Building2,
   FileCheck,
   CheckCircle2,
-  Sparkles,
 } from "lucide-react";
 
 export function Footer() {
@@ -57,9 +56,9 @@ export function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={() => openQuoteModal()}
-              className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/30 transition-all hover:scale-[1.02]"
+              className="flex items-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-orange-600/20 transition-all hover:scale-[1.02] cursor-pointer"
             >
-              <Sparkles className="h-4 w-4" />
+              <Calculator className="h-4 w-4" />
               <span>Launch Quote Wizard</span>
             </button>
 

@@ -25,7 +25,7 @@ import {
   Phone,
   HelpCircle,
   AlertCircle,
-  Sparkles,
+  Calculator,
 } from "lucide-react";
 
 export function QuoteWizardModal() {
@@ -164,8 +164,8 @@ Please dispatch the current all-in door-to-door DDP rate, flight/vessel schedule
         <div className="relative bg-slate-900 text-white px-6 py-5 border-b border-slate-800">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
-                <Sparkles className="h-5 w-5" />
+              <div className="h-10 w-10 rounded-lg bg-orange-600/20 border border-orange-500/30 flex items-center justify-center text-orange-400">
+                <Calculator className="h-5 w-5" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
@@ -417,10 +417,10 @@ Please dispatch the current all-in door-to-door DDP rate, flight/vessel schedule
                     }`}
                   >
                     <div className="flex items-center gap-1.5 font-bold text-sm text-slate-900 dark:text-white">
-                      <Ship className="h-4 w-4 text-indigo-600" /> Matson / Fast Ocean
+                      <Ship className="h-4 w-4 text-cyan-600" /> Matson / Fast Ocean
                     </div>
                     <span className="text-slate-500 mt-1">12–16 Days</span>
-                    <span className="text-[10px] text-indigo-600 dark:text-indigo-400 mt-2">
+                    <span className="text-[10px] text-cyan-600 dark:text-cyan-400 mt-2">
                       Priority Pier C / CCX Berth
                     </span>
                   </button>

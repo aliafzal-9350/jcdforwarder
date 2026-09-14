@@ -14,6 +14,7 @@ import {
   Plane,
   Ship,
   Train,
+  Truck,
   Box,
   Layers,
   Calculator,
@@ -25,13 +26,17 @@ import {
   ChevronDown,
   Building2,
   MapPin,
-  Sparkles,
   Phone,
   Mail,
   Zap,
   Globe,
   Quote,
   Check,
+  Search,
+  Ruler,
+  Anchor,
+  FileText,
+  ClipboardList,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -172,8 +177,8 @@ export default function HomePage() {
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-white">
                 China DDP Freight <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400">
-                  Forwarding &amp; Logistics
+                <span className="text-sky-400">
+                  Forwarding &amp; Global Logistics
                 </span>
               </h1>
 
@@ -184,9 +189,9 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <button
                   onClick={() => openQuoteModal()}
-                  className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 px-6 py-4 text-sm font-bold text-white shadow-xl shadow-blue-600/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="flex items-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 px-6 py-4 text-sm font-bold text-white shadow-xl shadow-orange-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  <Sparkles className="h-4 w-4" />
+                  <Calculator className="h-4 w-4" />
                   <span>Launch Instant Quote Wizard</span>
                 </button>
 
@@ -224,7 +229,7 @@ export default function HomePage() {
 
             {/* Right Interactive Quick Quote / Hub Teaser */}
             <div className="lg:col-span-5">
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-6 sm:p-8 backdrop-blur-md shadow-2xl space-y-6">
+              <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6 sm:p-8 shadow-xl space-y-6">
                 <div className="flex items-center justify-between pb-4 border-b border-slate-800">
                   <div className="flex items-center gap-2">
                     <span className="h-3 w-3 rounded-full bg-emerald-400 animate-ping" />
@@ -268,7 +273,7 @@ export default function HomePage() {
 
                   <button
                     onClick={() => openQuoteModal()}
-                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3.5 text-sm font-bold shadow-lg shadow-blue-600/25 transition-all"
+                    className="w-full flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white py-3.5 text-sm font-bold shadow-md shadow-blue-600/20 transition-all"
                   >
                     <span>Request Custom Landed DDP Rate</span>
                     <ArrowRight className="h-4 w-4" />
@@ -294,7 +299,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Service 1: Air Freight */}
           <Link
             href="/services/air-freight"
@@ -309,11 +314,11 @@ export default function HomePage() {
                   Air Freight &amp; Battery DDP
                 </h3>
                 <span className="text-xs font-mono font-bold text-blue-600 dark:text-blue-400 block mt-0.5">
-                  5–7 Business Days
+                  3–7 Business Days
                 </span>
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Direct flights from CAN, SZX, HKG to LGG, LHR, LAX. Specialized DG channel for UN38.3 pure batteries and cosmetics.
+                Direct flights from CAN, SZX, HKG to LGG, LHR, LAX, FRA. Specialized DG channel for UN38.3 pure batteries and cosmetics.
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-blue-600">
@@ -322,28 +327,28 @@ export default function HomePage() {
             </div>
           </Link>
 
-          {/* Service 2: Ocean Freight */}
+          {/* Service 2: Sea Freight */}
           <Link
-            href="/services/sea-freight-fcl-lcl"
-            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col justify-between hover:border-indigo-500/50 hover:shadow-lg transition-all group"
+            href="/services/sea-freight"
+            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col justify-between hover:border-cyan-500/50 hover:shadow-lg transition-all group"
           >
             <div className="space-y-4">
-              <div className="h-12 w-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <div className="h-12 w-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/40 text-cyan-600 flex items-center justify-center group-hover:scale-105 transition-transform">
                 <Ship className="h-6 w-6" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 transition-colors">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 transition-colors">
                   Ocean Freight (FCL &amp; LCL)
                 </h3>
-                <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 block mt-0.5">
-                  12–30 Days Transit
+                <span className="text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 block mt-0.5">
+                  14–35 Days Transit
                 </span>
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 20GP, 40GP, 40HQ, 45HQ container booking and weekly LCL consolidations via COSCO, Evergreen, Maersk, and Matson CLX.
               </p>
             </div>
-            <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-indigo-600">
+            <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-cyan-600">
               <span>Explore Sea Solutions</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -376,9 +381,9 @@ export default function HomePage() {
             </div>
           </Link>
 
-          {/* Service 4: Amazon FBA */}
+          {/* Service 4: DDP Shipping */}
           <Link
-            href="/services/amazon-fba-logistics"
+            href="/services/ddp-shipping"
             className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col justify-between hover:border-emerald-500/50 hover:shadow-lg transition-all group"
           >
             <div className="space-y-4">
@@ -387,18 +392,72 @@ export default function HomePage() {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">
-                  Amazon FBA First-Leg
+                  DDP Door-to-Door Freight
                 </h3>
                 <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 block mt-0.5">
-                  Zero Dock Rejection
+                  All Duties &amp; Taxes Paid
                 </span>
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                CARP/ISA direct EDI appointment booking, FNSKU labeling, GMA Grade B &amp; EPAL pallet wrapping, and carton weight compliance.
+                All-inclusive air &amp; ocean door-to-door delivery with export declarations, destination customs clearance, and final delivery included.
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-emerald-600">
-              <span>Explore FBA Prep</span>
+              <span>Explore DDP Delivery</span>
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
+
+          {/* Service 5: Trucking Freight */}
+          <Link
+            href="/services/trucking-freight"
+            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col justify-between hover:border-slate-500/50 hover:shadow-lg transition-all group"
+          >
+            <div className="space-y-4">
+              <div className="h-12 w-12 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center group-hover:scale-105 transition-transform">
+                <Truck className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                  Inland &amp; TIR Trucking
+                </h3>
+                <span className="text-xs font-mono font-bold text-slate-600 dark:text-slate-400 block mt-0.5">
+                  Nationwide &amp; Cross-Border
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Factory pickup cartage across Guangdong and Zhejiang, bonded customs shuttle transfer, and China-Europe TIR linehaul.
+              </p>
+            </div>
+            <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-blue-600">
+              <span>Explore Road Freight</span>
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
+
+          {/* Service 6: Express Courier */}
+          <Link
+            href="/services/express-courier"
+            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col justify-between hover:border-rose-500/50 hover:shadow-lg transition-all group"
+          >
+            <div className="space-y-4">
+              <div className="h-12 w-12 rounded-xl bg-rose-100 dark:bg-rose-900/40 text-rose-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                <Clock className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-rose-600 transition-colors">
+                  Express Courier Service
+                </h3>
+                <span className="text-xs font-mono font-bold text-rose-600 dark:text-rose-400 block mt-0.5">
+                  3–5 Business Days
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Direct accounts with DHL Express, FedEx Priority, and UPS Worldwide for urgent samples, electronics, and time-critical spares.
+              </p>
+            </div>
+            <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-rose-600">
+              <span>Explore Express Rates</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
@@ -490,36 +549,36 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Tool 1 */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 space-y-4 shadow-sm flex flex-col justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Tool 1: 3D Container */}
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 space-y-4 shadow-sm flex flex-col justify-between hover:border-blue-500/50 transition-all">
             <div className="space-y-3">
-              <div className="h-12 w-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 flex items-center justify-center">
+              <div className="h-12 w-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 flex items-center justify-center">
                 <Layers className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                 3D Container Simulator
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Test your cargo carton dimensions in a real-time Three.js 3D container wireframe (20GP, 40GP, 40HQ, 45HQ) to calculate exact volume fill rate and payload weight limits.
+                Test carton dimensions in a real-time Three.js 3D container wireframe (20GP, 40GP, 40HQ, 45HQ) to calculate exact volume fill rate and payload weight limits.
               </p>
             </div>
             <Link
               href="/tools/container-loading-calculator"
-              className="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 hover:underline pt-4 border-t border-slate-100 dark:border-slate-800"
+              className="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:underline pt-4 border-t border-slate-100 dark:border-slate-800"
             >
               <span>Launch 3D Simulator</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
-          {/* Tool 2 */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 space-y-4 shadow-sm flex flex-col justify-between">
+          {/* Tool 2: Volumetric Calculator */}
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 space-y-4 shadow-sm flex flex-col justify-between hover:border-blue-500/50 transition-all">
             <div className="space-y-3">
               <div className="h-12 w-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 flex items-center justify-center">
                 <Calculator className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                 Volumetric Weight Calculator
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -535,27 +594,112 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Tool 3 */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 space-y-4 shadow-sm flex flex-col justify-between">
+          {/* Tool 3: Cargo & Express Tracking */}
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 space-y-4 shadow-sm flex flex-col justify-between hover:border-blue-500/50 transition-all">
             <div className="space-y-3">
               <div className="h-12 w-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 flex items-center justify-center">
-                <Compass className="h-6 w-6" />
+                <Search className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                Incoterms 2020 Decision Engine
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                Cargo &amp; Express Tracking
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                10-stage transfer-of-risk comparison across EXW, FOB, CIF, DDU, and DDP. Determine whether supplier pickup or all-inclusive landed DDP protects your capital.
+                Track DHL, FedEx, UPS couriers and JCD NVOCC internal air waybills with real-time telematics from factory pickup to signed delivery.
               </p>
             </div>
             <Link
-              href="/tools/incoterms-selector"
+              href="/tools/tracking"
               className="inline-flex items-center gap-2 text-xs font-bold text-emerald-600 hover:underline pt-4 border-t border-slate-100 dark:border-slate-800"
             >
-              <span>Compare Incoterms Matrix</span>
+              <span>Track Active Consignment</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
+
+          {/* Tool 4: Flight Route Calculator */}
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 space-y-4 shadow-sm flex flex-col justify-between hover:border-blue-500/50 transition-all">
+            <div className="space-y-3">
+              <div className="h-12 w-12 rounded-xl bg-sky-100 dark:bg-sky-900/40 text-sky-600 flex items-center justify-center">
+                <Plane className="h-6 w-6" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                Flight Route &amp; Transit Calculator
+              </h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Calculate great-circle flight distances, direct airborne cruising hours, airline BSA allocations, and door-to-door Air DDP transit schedules.
+              </p>
+            </div>
+            <Link
+              href="/tools/flight-route-calculator"
+              className="inline-flex items-center gap-2 text-xs font-bold text-sky-600 hover:underline pt-4 border-t border-slate-100 dark:border-slate-800"
+            >
+              <span>Calculate Air Routes</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          {/* Tool 5: China HS Code Finder */}
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 space-y-4 shadow-sm flex flex-col justify-between hover:border-blue-500/50 transition-all">
+            <div className="space-y-3">
+              <div className="h-12 w-12 rounded-xl bg-teal-100 dark:bg-teal-900/40 text-teal-600 flex items-center justify-center">
+                <ShieldCheck className="h-6 w-6" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                China HS Code &amp; Tariff Finder
+              </h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Look up Chinese export customs codes, GACC inspection codes, export VAT rebate percentages, and key destination compliance requirements.
+              </p>
+            </div>
+            <Link
+              href="/tools/china-hs-code"
+              className="inline-flex items-center gap-2 text-xs font-bold text-teal-600 hover:underline pt-4 border-t border-slate-100 dark:border-slate-800"
+            >
+              <span>Search Customs Codes</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          {/* Tool 6: Proforma Invoice Generator */}
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 space-y-4 shadow-sm flex flex-col justify-between hover:border-blue-500/50 transition-all">
+            <div className="space-y-3">
+              <div className="h-12 w-12 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 flex items-center justify-center">
+                <FileText className="h-6 w-6" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                Proforma Invoice Generator
+              </h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Generate compliant international proforma invoices with automated subtotal calculation, freight apportionment, Incoterms, and printable A4 PDF export.
+              </p>
+            </div>
+            <Link
+              href="/tools/proforma-invoice-generator"
+              className="inline-flex items-center gap-2 text-xs font-bold text-amber-600 hover:underline pt-4 border-t border-slate-100 dark:border-slate-800"
+            >
+              <span>Generate Trade Invoice</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Explore All Tools Footer CTA */}
+        <div className="mt-8 p-6 rounded-2xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
+          <div className="space-y-1">
+            <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+              Looking for Unit Converters, Packing List Exporters, or Seaports?
+            </h4>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Explore our full suite of 10 working international freight tools built for importers and supply chain managers.
+            </p>
+          </div>
+          <Link
+            href="/tools"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md transition-colors"
+          >
+            <span>View All 10 Logistics Tools</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
       </section>
 
@@ -871,9 +1015,9 @@ export default function HomePage() {
 
                 <button
                   onClick={() => openQuoteModal()}
-                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white py-3.5 text-sm font-bold shadow-md transition-all"
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white py-3.5 text-sm font-bold shadow-md transition-all"
                 >
-                  <Sparkles className="h-4 w-4" />
+                  <Calculator className="h-4 w-4" />
                   <span>Start Quote Inquiry Wizard</span>
                 </button>
               </div>
@@ -894,9 +1038,9 @@ export default function HomePage() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={() => openQuoteModal()}
-              className="flex items-center gap-2 rounded-xl bg-white text-blue-600 hover:bg-blue-50 px-7 py-4 text-sm font-bold shadow-lg transition-all hover:scale-105"
+              className="flex items-center gap-2 rounded-xl bg-white text-blue-900 hover:bg-blue-50 px-7 py-4 text-sm font-bold shadow-lg transition-all hover:scale-105"
             >
-              <Sparkles className="h-4 w-4" />
+              <Calculator className="h-4 w-4 text-orange-600" />
               <span>Launch Quote Wizard</span>
             </button>
             <a

@@ -1,0 +1,1 @@
+{"schema":4,"country":"AI","ports":{"UNLOCODE:AIMBB":{"_validation":{"method":"unlocode_coastal_validation","score":79,"coast_distance_km":11.08,"checked_at":"2026-07-18T08:26:57+00:00"}},"UNLOCODE:AIRBY":{"_validation":{"method":"unlocode_coastal_validation","score":82,"coast_distance_km":9.97,"checked_at":"2026-07-18T08:26:57+00:00"}}}}

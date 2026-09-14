@@ -33,25 +33,25 @@ export function BrandLogo({
       {/* Brand Mark Container */}
       <div
         className={cn(
-          "relative overflow-hidden rounded-xl shadow-sm transition-transform duration-200 group-hover:scale-105 shrink-0 border border-slate-200/80 dark:border-slate-700/80",
-          size === "sm" && "h-8 w-8 rounded-lg",
+          "relative overflow-hidden rounded-xl shadow-xs transition-transform duration-200 group-hover:scale-105 shrink-0 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-0.5",
+          size === "sm" && "h-9 w-9 rounded-lg",
           size === "md" && "h-11 w-11 rounded-xl",
           size === "lg" && "h-14 w-14 rounded-2xl"
         )}
       >
         {!imageError ? (
           <Image
-            src="/logo.jfif"
+            src="/logo.png"
             alt="JCD Forwarder Logo"
             width={dimensions.width * 2}
             height={dimensions.height * 2}
-            className="h-full w-full object-cover object-center scale-110"
+            className="h-full w-full object-contain rounded-lg"
             priority
             onError={() => setImageError(true)}
           />
         ) : (
           /* Fallback if image fails */
-          <div className="h-full w-full bg-gradient-to-tr from-blue-700 via-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-lg">
+          <div className="h-full w-full bg-[#081A36] flex items-center justify-center text-white font-black text-sm tracking-wider">
             JCD
           </div>
         )}

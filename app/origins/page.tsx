@@ -13,7 +13,7 @@ import {
   Clock,
   MapPin,
   ArrowRight,
-  Sparkles,
+  Calculator,
   MessageCircle,
   CheckCircle2,
   Warehouse,
@@ -38,7 +38,7 @@ export default function OriginsIndexPage() {
 
             <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
               Chinese Origin Hubs &amp; <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400">
+              <span className="text-sky-400">
                 Port Consolidation Bases
               </span>
             </h1>
@@ -206,9 +206,9 @@ export default function OriginsIndexPage() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={() => openQuoteModal({ originId: "shenzhen" })}
-              className="flex items-center gap-2 rounded-xl bg-white text-blue-600 hover:bg-blue-50 px-7 py-4 text-sm font-bold shadow-lg transition-all hover:scale-105"
+              className="flex items-center gap-2 rounded-xl bg-white text-blue-900 hover:bg-blue-50 px-7 py-4 text-sm font-bold shadow-lg transition-all hover:scale-105"
             >
-              <Sparkles className="h-4 w-4" />
+              <Boxes className="h-4 w-4 text-orange-600" />
               <span>Consolidate Your Cargo</span>
             </button>
             <a

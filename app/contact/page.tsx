@@ -15,7 +15,6 @@ import {
   Send,
   Building2,
   CheckCircle2,
-  Sparkles,
   ExternalLink,
   ArrowRight,
 } from "lucide-react";
@@ -86,7 +85,7 @@ Please confirm current all-inclusive DDP freight rate and vessel/flight cut-off 
 
             <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
               Contact JCD Forwarder <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400">
+              <span className="text-sky-400">
                 Direct Dispatch &amp; RFQ Desk
               </span>
             </h1>

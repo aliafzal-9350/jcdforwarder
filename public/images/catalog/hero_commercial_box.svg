@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#081A36"/>
+  <polygon points="400,100 620,200 400,300 180,200" fill="#D97706" stroke="#B45309" stroke-width="3"/>
+  <polygon points="180,200 400,300 400,450 180,350" fill="#B45309" stroke="#92400E" stroke-width="3"/>
+  <polygon points="620,200 400,300 400,450 620,350" fill="#92400E" stroke="#78350F" stroke-width="3"/>
+  <rect x="220" y="240" width="70" height="45" rx="3" fill="#FFFFFF"/>
+  <line x1="230" y1="255" x2="280" y2="255" stroke="#0F172A" stroke-width="3"/>
+  <line x1="230" y1="265" x2="270" y2="265" stroke="#0F172A" stroke-width="2"/>
+  <text x="400" y="60" text-anchor="middle" fill="#FDE68A" font-family="sans-serif" font-size="18" font-weight="bold">AMAZON FBA COMPLIANT PALLET & CARTON SPEC</text>
+</svg>

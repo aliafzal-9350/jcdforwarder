@@ -14,7 +14,7 @@ import {
   ArrowRight,
   MessageCircle,
   FileText,
-  Sparkles,
+  Calculator,
   Compass,
   Layers,
   Leaf,
@@ -88,8 +88,8 @@ export default function RailFreightPage() {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
               China-Europe Railway <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-300 to-yellow-200">
-                Express (CR Express)
+              <span className="text-amber-400">
+                Express (CR Express Landbridge)
               </span>
             </h1>
 
@@ -102,7 +102,7 @@ export default function RailFreightPage() {
                 onClick={() => openQuoteModal({ serviceType: "rail-ddp" })}
                 className="flex items-center gap-2 rounded-xl bg-amber-600 hover:bg-amber-700 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-amber-600/30 transition-all hover:scale-[1.02]"
               >
-                <Sparkles className="h-4 w-4" />
+                <Calculator className="h-4 w-4" />
                 <span>Get Rail Freight Quote</span>
               </button>
 
@@ -292,7 +292,7 @@ export default function RailFreightPage() {
               onClick={() => openQuoteModal({ serviceType: "rail-ddp" })}
               className="flex items-center gap-2 rounded-xl bg-amber-600 hover:bg-amber-700 px-6 py-3.5 text-sm font-bold shadow-md transition-all hover:scale-105"
             >
-              <Sparkles className="h-4 w-4" />
+              <Calculator className="h-4 w-4" />
               <span>Launch Quote Wizard</span>
             </button>
             <a

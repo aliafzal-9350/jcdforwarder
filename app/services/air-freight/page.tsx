@@ -16,7 +16,6 @@ import {
   FileText,
   Building2,
   Scale,
-  Sparkles,
   Award,
 } from "lucide-react";
 
@@ -174,7 +173,7 @@ export default function AirFreightPage() {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
               China Air Freight &amp; <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400">
+              <span className="text-sky-400">
                 Air DDP Door-to-Door
               </span>
             </h1>
@@ -293,7 +292,7 @@ export default function AirFreightPage() {
             {/* Tier 2: Economy Air DDP */}
             <div className="rounded-2xl bg-white dark:bg-slate-900 p-8 shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
               <div className="space-y-4">
-                <div className="h-12 w-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 flex items-center justify-center">
+                <div className="h-12 w-12 rounded-xl bg-sky-100 dark:bg-sky-900/40 text-sky-600 flex items-center justify-center">
                   <Plane className="h-6 w-6" />
                 </div>
                 <div>

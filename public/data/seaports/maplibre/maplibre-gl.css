@@ -1,0 +1,88 @@
+/* Minimal, resilient MapLibre layout rules. Default controls/popups are not used. */
+.maplibregl-map, .dwp-app .maplibregl-map{position:relative;width:100%;height:100%;overflow:hidden;-webkit-tap-highlight-color:transparent}
+.maplibregl-map:fullscreen, .dwp-app .maplibregl-map:fullscreen{width:100%;height:100%}
+.maplibregl-canvas, .dwp-app .maplibregl-canvas{position:absolute;top:0;left:0;width:100%!important;height:100%!important}
+.maplibregl-canvas-container.maplibregl-interactive, .dwp-app .maplibregl-canvas-container.maplibregl-interactive{cursor:grab;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+.maplibregl-canvas-container.maplibregl-interactive.maplibregl-track-pointer, .dwp-app .maplibregl-canvas-container.maplibregl-interactive.maplibregl-track-pointer{cursor:pointer}
+.maplibregl-canvas-container.maplibregl-interactive:active, .dwp-app .maplibregl-canvas-container.maplibregl-interactive:active{cursor:grabbing}
+.maplibregl-canvas-container.maplibregl-touch-zoom-rotate, .maplibregl-canvas-container.maplibregl-touch-zoom-rotate .maplibregl-canvas{touch-action:pan-x pan-y}
+.maplibregl-canvas-container.maplibregl-touch-drag-pan, .maplibregl-canvas-container.maplibregl-touch-drag-pan .maplibregl-canvas{touch-action:pinch-zoom}
+.maplibregl-canvas-container.maplibregl-touch-zoom-rotate.maplibregl-touch-drag-pan, .maplibregl-canvas-container.maplibregl-touch-zoom-rotate.maplibregl-touch-drag-pan .maplibregl-canvas{touch-action:none}
+.maplibregl-control-container, .dwp-app .maplibregl-control-container{display:none!important}
+
+/* Globe Tooltip */
+.dwp-map-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 50;
+  background: rgba(15, 23, 42, 0.96);
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+.dwp-map-tooltip strong {
+  font-weight: 700;
+  font-size: 13px;
+  color: #ffffff;
+}
+.dwp-map-tooltip span {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+/* Port Chooser Popover */
+.dwp-map-port-chooser {
+  position: absolute;
+  z-index: 60;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  min-width: 200px;
+  max-width: 280px;
+}
+.dark .dwp-map-port-chooser {
+  background: #0f172a;
+  border-color: #334155;
+  color: #ffffff;
+}
+.dwp-map-port-chooser-title {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #1e293b;
+}
+.dark .dwp-map-port-chooser-title {
+  color: #f1f5f9;
+}
+.dwp-map-port-chooser-list button {
+  width: 100%;
+  text-align: left;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: background 0.15s;
+}
+.dwp-map-port-chooser-list button:hover {
+  background: #eff6ff;
+  color: #2563eb;
+}
+.dark .dwp-map-port-chooser-list button:hover {
+  background: #1e293b;
+  color: #60a5fa;
+}
+
