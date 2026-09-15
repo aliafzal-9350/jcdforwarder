@@ -295,7 +295,7 @@ Please dispatch the current all-in door-to-door DDP rate, flight/vessel schedule
                   >
                     {TARGET_ROUTES.map((route) => (
                       <option key={route.code} value={route.code}>
-                        {route.name} ({route.code}) — De Minimis: {route.deMinimisThreshold}
+                        {route.flag} {route.name} ({route.code}) — De Minimis: {route.deMinimisThreshold}
                       </option>
                     ))}
                   </select>
@@ -574,8 +574,10 @@ Please dispatch the current all-in door-to-door DDP rate, flight/vessel schedule
                   <span className="text-xs font-semibold text-blue-900 dark:text-blue-200 uppercase tracking-wider">
                     Shipment Summary
                   </span>
-                  <span className="text-xs font-mono font-bold text-blue-700 dark:text-blue-300">
-                    {selectedOrigin.name} ➔ {selectedRoute.name}
+                  <span className="text-xs font-mono font-bold text-blue-700 dark:text-blue-300 flex items-center gap-1.5">
+                    <span>🇨🇳 {selectedOrigin.name}</span>
+                    <span>➔</span>
+                    <span>{selectedRoute.flag} {selectedRoute.name}</span>
                   </span>
                 </div>
                 <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-slate-700 dark:text-slate-300">

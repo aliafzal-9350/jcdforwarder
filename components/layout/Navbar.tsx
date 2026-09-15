@@ -238,17 +238,17 @@ export function Navbar() {
                 </button>
 
                 {servicesOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[980px] pt-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50">
-                    <div className="rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-                      <div className="grid grid-cols-12 min-h-[420px]">
+                  <div className="absolute top-full left-0 sm:-left-8 lg:-left-12 w-[760px] max-w-[90vw] pt-2 animate-in fade-in slide-in-from-top-2 duration-150 z-50">
+                    <div className="rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden max-h-[calc(100vh-110px)] overflow-y-auto">
+                      <div className="grid grid-cols-12">
                         {/* Left Tabbed Sidebar */}
-                        <div className="col-span-3 bg-slate-50/80 dark:bg-slate-950/60 p-4 border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between">
-                          <div className="space-y-1.5">
+                        <div className="col-span-4 bg-slate-50/90 dark:bg-slate-950/70 p-3 border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between gap-3">
+                          <div className="space-y-1">
                             {/* Tab 1: Main Service */}
                             <button
                               onMouseEnter={() => setActiveServiceTab("main")}
                               onClick={() => setActiveServiceTab("main")}
-                              className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition-all text-left ${
+                              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all text-left ${
                                 activeServiceTab === "main"
                                   ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm border border-blue-500/30"
                                   : "text-slate-700 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-900/40"
@@ -262,7 +262,7 @@ export function Navbar() {
                             <button
                               onMouseEnter={() => setActiveServiceTab("country")}
                               onClick={() => setActiveServiceTab("country")}
-                              className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition-all text-left ${
+                              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all text-left ${
                                 activeServiceTab === "country"
                                   ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm border border-blue-500/30"
                                   : "text-slate-700 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-900/40"
@@ -276,7 +276,7 @@ export function Navbar() {
                             <button
                               onMouseEnter={() => setActiveServiceTab("city")}
                               onClick={() => setActiveServiceTab("city")}
-                              className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition-all text-left ${
+                              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all text-left ${
                                 activeServiceTab === "city"
                                   ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm border border-blue-500/30"
                                   : "text-slate-700 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-900/40"
@@ -288,18 +288,18 @@ export function Navbar() {
                           </div>
 
                           {/* Left Bottom Expert Card */}
-                          <div className="pt-4 border-t border-slate-200/80 dark:border-slate-800">
-                            <div className="p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/40 space-y-1.5">
-                              <div className="flex items-center gap-2 text-blue-700 dark:text-blue-300 font-bold text-xs">
-                                <Headphones className="h-4 w-4 text-blue-600" />
-                                <span>Find the right service</span>
+                          <div className="pt-2 border-t border-slate-200/80 dark:border-slate-800">
+                            <div className="p-2.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/40 space-y-1">
+                              <div className="flex items-center gap-1.5 text-blue-700 dark:text-blue-300 font-bold text-xs">
+                                <Headphones className="h-3.5 w-3.5 text-blue-600" />
+                                <span>Freight Advisory Desk</span>
                               </div>
-                              <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                                Our logistics experts are here to advise on freight modes and customs.
+                              <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">
+                                Direct advice on DDP shipping, HS customs &amp; routing.
                               </p>
                               <button
                                 onClick={() => openQuoteModal()}
-                                className="inline-flex items-center gap-1 text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline pt-1"
+                                className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-600 dark:text-blue-400 hover:underline pt-0.5"
                               >
                                 <span>Contact our experts &rarr;</span>
                               </button>
@@ -308,167 +308,167 @@ export function Navbar() {
                         </div>
 
                         {/* Right Content Panel */}
-                        <div className="col-span-9 p-6 flex flex-col justify-between">
+                        <div className="col-span-8 p-3.5 sm:p-4 flex flex-col justify-between gap-3">
                           {/* PANEL A: MAIN 6 SERVICES */}
                           {activeServiceTab === "main" && (
-                            <div className="space-y-6 animate-in fade-in duration-150">
+                            <div className="space-y-3 animate-in fade-in duration-150">
                               {/* 6 Core Services in 2 Columns */}
-                              <div className="grid grid-cols-2 gap-3.5">
+                              <div className="grid grid-cols-2 gap-2">
                                 {/* Service 1: Air Freight */}
                                 <Link
                                   href="/services/air-freight"
-                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                  className="flex items-start justify-between p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
                                 >
-                                  <div className="flex items-start gap-3">
-                                    <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:scale-105 transition-transform">
-                                      <Plane className="h-5 w-5" />
+                                  <div className="flex items-start gap-2.5 min-w-0">
+                                    <div className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:scale-105 transition-transform shrink-0">
+                                      <Plane className="h-4 w-4" />
                                     </div>
-                                    <div>
-                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                    <div className="min-w-0">
+                                      <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                                         Air freight
                                       </h4>
-                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
-                                        Fast and reliable air cargo shipping worldwide with real-time tracking.
+                                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-tight line-clamp-2">
+                                        Fast and reliable air cargo shipping worldwide.
                                       </p>
                                     </div>
                                   </div>
-                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                  <ChevronRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-0.5 shrink-0" />
                                 </Link>
 
                                 {/* Service 2: Rail Freight */}
                                 <Link
                                   href="/services/rail-freight"
-                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                  className="flex items-start justify-between p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
                                 >
-                                  <div className="flex items-start gap-3">
-                                    <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 group-hover:scale-105 transition-transform">
-                                      <Train className="h-5 w-5" />
+                                  <div className="flex items-start gap-2.5 min-w-0">
+                                    <div className="p-1.5 rounded-lg bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 group-hover:scale-105 transition-transform shrink-0">
+                                      <Train className="h-4 w-4" />
                                     </div>
-                                    <div>
-                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                    <div className="min-w-0">
+                                      <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                                         Rail freight
                                       </h4>
-                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
-                                        Secure and efficient rail transport across major international routes.
+                                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-tight line-clamp-2">
+                                        China-Europe railway express routes.
                                       </p>
                                     </div>
                                   </div>
-                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                  <ChevronRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-0.5 shrink-0" />
                                 </Link>
 
                                 {/* Service 3: Sea Freight */}
                                 <Link
                                   href="/services/sea-freight"
-                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                  className="flex items-start justify-between p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
                                 >
-                                  <div className="flex items-start gap-3">
-                                    <div className="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-transform">
-                                      <Ship className="h-5 w-5" />
+                                  <div className="flex items-start gap-2.5 min-w-0">
+                                    <div className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-transform shrink-0">
+                                      <Ship className="h-4 w-4" />
                                     </div>
-                                    <div>
-                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                    <div className="min-w-0">
+                                      <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                                         Sea freight
                                       </h4>
-                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
-                                        Cost-effective ocean freight solutions for FCL and LCL shipments.
+                                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-tight line-clamp-2">
+                                        Cost-effective FCL and LCL ocean shipping.
                                       </p>
                                     </div>
                                   </div>
-                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                  <ChevronRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-0.5 shrink-0" />
                                 </Link>
 
                                 {/* Service 4: Trucking Freight */}
                                 <Link
                                   href="/services/trucking-freight"
-                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                  className="flex items-start justify-between p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
                                 >
-                                  <div className="flex items-start gap-3">
-                                    <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover:scale-105 transition-transform">
-                                      <Truck className="h-5 w-5" />
+                                  <div className="flex items-start gap-2.5 min-w-0">
+                                    <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover:scale-105 transition-transform shrink-0">
+                                      <Truck className="h-4 w-4" />
                                     </div>
-                                    <div>
-                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                    <div className="min-w-0">
+                                      <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                                         Trucking freight
                                       </h4>
-                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
-                                        Flexible inland transport and cross-border trucking solutions.
+                                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-tight line-clamp-2">
+                                        Cross-border inland haulage and cartage.
                                       </p>
                                     </div>
                                   </div>
-                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                  <ChevronRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-0.5 shrink-0" />
                                 </Link>
 
                                 {/* Service 5: DDP Freight */}
                                 <Link
                                   href="/services/ddp-shipping"
-                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                  className="flex items-start justify-between p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
                                 >
-                                  <div className="flex items-start gap-3">
-                                    <div className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 group-hover:scale-105 transition-transform">
-                                      <Box className="h-5 w-5" />
+                                  <div className="flex items-start gap-2.5 min-w-0">
+                                    <div className="p-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 group-hover:scale-105 transition-transform shrink-0">
+                                      <Box className="h-4 w-4" />
                                     </div>
-                                    <div>
-                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                    <div className="min-w-0">
+                                      <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                                         DDP freight
                                       </h4>
-                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
-                                        Door-to-door delivery with duties and taxes paid. Hassle-free.
+                                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-tight line-clamp-2">
+                                        Door-to-door with all duties &amp; tax paid.
                                       </p>
                                     </div>
                                   </div>
-                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                  <ChevronRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-0.5 shrink-0" />
                                 </Link>
 
                                 {/* Service 6: Express Courier */}
                                 <Link
                                   href="/services/express-courier"
-                                  className="flex items-start justify-between p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
+                                  className="flex items-start justify-between p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-blue-50/30 dark:hover:bg-blue-950/20 transition-all group"
                                 >
-                                  <div className="flex items-start gap-3">
-                                    <div className="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 group-hover:scale-105 transition-transform">
-                                      <Clock className="h-5 w-5" />
+                                  <div className="flex items-start gap-2.5 min-w-0">
+                                    <div className="p-1.5 rounded-lg bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 group-hover:scale-105 transition-transform shrink-0">
+                                      <Clock className="h-4 w-4" />
                                     </div>
-                                    <div>
-                                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                        Express Courier Service
+                                    <div className="min-w-0">
+                                      <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                                        Express Courier
                                       </h4>
-                                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">
-                                        Time-sensitive delivery with global express courier partners.
+                                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-tight line-clamp-2">
+                                        DHL, FedEx, UPS priority global dispatch.
                                       </p>
                                     </div>
                                   </div>
-                                  <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-1" />
+                                  <ChevronRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all mt-0.5 shrink-0" />
                                 </Link>
                               </div>
 
-                              {/* Bottom Trust Feature Bar (Exact match to reference) */}
-                              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-3 gap-4">
-                                <div className="flex items-center gap-2.5">
-                                  <ShieldCheck className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0" />
-                                  <div>
-                                    <h5 className="text-xs font-bold text-slate-900 dark:text-white">Reliable &amp; Secure</h5>
-                                    <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">
-                                      Your cargo is protected every step of the way.
+                              {/* Bottom Trust Feature Bar */}
+                              <div className="pt-2.5 border-t border-slate-100 dark:border-slate-800 grid grid-cols-3 gap-2">
+                                <div className="flex items-center gap-2">
+                                  <ShieldCheck className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                                  <div className="min-w-0">
+                                    <h5 className="text-[11px] font-bold text-slate-900 dark:text-white truncate">Reliable &amp; Secure</h5>
+                                    <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-none truncate">
+                                      100% insured cargo.
                                     </p>
                                   </div>
                                 </div>
 
-                                <div className="flex items-center gap-2.5">
-                                  <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0" />
-                                  <div>
-                                    <h5 className="text-xs font-bold text-slate-900 dark:text-white">On-time Delivery</h5>
-                                    <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">
-                                      Punctual delivery with real-time updates.
+                                <div className="flex items-center gap-2">
+                                  <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                                  <div className="min-w-0">
+                                    <h5 className="text-[11px] font-bold text-slate-900 dark:text-white truncate">On-time Delivery</h5>
+                                    <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-none truncate">
+                                      Punctual milestone updates.
                                     </p>
                                   </div>
                                 </div>
 
-                                <div className="flex items-center gap-2.5">
-                                  <Headphones className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0" />
-                                  <div>
-                                    <h5 className="text-xs font-bold text-slate-900 dark:text-white">24/7 Expert Support</h5>
-                                    <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight">
-                                      Our team is here to support you anytime.
+                                <div className="flex items-center gap-2">
+                                  <Headphones className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                                  <div className="min-w-0">
+                                    <h5 className="text-[11px] font-bold text-slate-900 dark:text-white truncate">24/7 Support</h5>
+                                    <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-none truncate">
+                                      Direct WeChat &amp; WhatsApp.
                                     </p>
                                   </div>
                                 </div>
@@ -478,41 +478,44 @@ export function Navbar() {
 
                           {/* PANEL B: COUNTRY GUIDE */}
                           {activeServiceTab === "country" && (
-                            <div className="space-y-4 animate-in fade-in duration-150">
+                            <div className="space-y-3 animate-in fade-in duration-150">
                               <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
                                 <div>
-                                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">
-                                    Global Shipping Destinations &amp; DDP Routes
+                                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                                    Global Destinations &amp; DDP Trade Lanes
                                   </h4>
-                                  <p className="text-xs text-slate-500">
-                                    Customs clearance guidelines, transit times, and port routing for 44+ countries.
+                                  <p className="text-[11px] text-slate-500">
+                                    Customs clearance &amp; port routing for 44+ destination countries.
                                   </p>
                                 </div>
                                 <Link
                                   href="/routes"
-                                  className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                                  className="text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
                                 >
-                                  <span>View All 44+ Routes</span>
+                                  <span>View All 44+</span>
                                   <ArrowRight className="h-3 w-3" />
                                 </Link>
                               </div>
 
-                              <div className="grid grid-cols-3 gap-2.5">
+                              <div className="grid grid-cols-3 gap-2">
                                 {topTierRoutes.map((route) => (
                                   <Link
                                     key={route.code}
                                     href={`/routes/${route.slug}`}
-                                    className="p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors flex items-center justify-between group"
+                                    className="p-2 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-900/60 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors flex items-center justify-between group"
                                   >
-                                    <div>
-                                      <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                                        {route.name}
-                                      </div>
-                                      <div className="text-[10px] text-slate-400">
-                                        {route.region}
+                                    <div className="flex items-center gap-1.5 min-w-0">
+                                      <span className="text-base shrink-0">{route.flag}</span>
+                                      <div className="truncate">
+                                        <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
+                                          {route.name}
+                                        </div>
+                                        <div className="text-[10px] text-slate-400 truncate">
+                                          {route.region}
+                                        </div>
                                       </div>
                                     </div>
-                                    <span className="font-mono text-[10px] text-slate-400 font-semibold">
+                                    <span className="font-mono text-[10px] text-slate-400 font-semibold shrink-0 ml-1">
                                       {route.code}
                                     </span>
                                   </Link>
@@ -839,12 +842,15 @@ export function Navbar() {
                           <Link
                             key={route.code}
                             href={`/routes/${route.slug}`}
-                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors text-xs"
+                            className="flex items-center justify-between gap-1.5 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors text-xs group"
                           >
-                            <span className="font-bold text-slate-900 dark:text-white">
-                              {route.name}
+                            <span className="flex items-center gap-1.5 truncate">
+                              <span className="text-base shrink-0">{route.flag}</span>
+                              <span className="font-bold text-slate-900 dark:text-white group-hover:text-blue-600 truncate">
+                                {route.name}
+                              </span>
                             </span>
-                            <span className="font-mono text-[10px] text-slate-400">
+                            <span className="font-mono text-[10px] text-slate-400 shrink-0">
                               {route.code}
                             </span>
                           </Link>
@@ -1132,9 +1138,10 @@ export function Navbar() {
                       <Link
                         key={r.code}
                         href={`/routes/${r.slug}`}
-                        className="py-1 text-slate-600 dark:text-slate-300 font-medium hover:text-blue-600"
+                        className="py-1 text-slate-600 dark:text-slate-300 font-medium hover:text-blue-600 flex items-center gap-1.5"
                       >
-                        {r.name} ({r.code})
+                        <span className="text-sm shrink-0">{r.flag}</span>
+                        <span className="truncate">{r.name} ({r.code})</span>
                       </Link>
                     ))}
                   </div>

@@ -438,9 +438,10 @@ export default function HomePage() {
                     <td className="py-4 pl-5 pr-4">
                       <Link
                         href={`/routes/${route.slug}`}
-                        className="font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
+                        className="font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 inline-flex items-center gap-2"
                       >
-                        {route.name}
+                        <span className="text-lg shrink-0">{route.flag}</span>
+                        <span>{route.name}</span>
                       </Link>
                       <span className="ml-2 text-xs font-mono text-slate-400">{route.code}</span>
                     </td>

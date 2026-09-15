@@ -301,10 +301,13 @@ export function Footer() {
                 <li key={route.code}>
                   <Link
                     href={`/routes/${route.slug}`}
-                    className="hover:text-blue-400 transition-colors flex items-center justify-between"
+                    className="hover:text-blue-400 transition-colors flex items-center justify-between group"
                   >
-                    <span>{route.name}</span>
-                    <span className="text-[10px] font-mono text-slate-500">
+                    <span className="flex items-center gap-1.5 truncate">
+                      <span className="text-sm shrink-0">{route.flag}</span>
+                      <span className="truncate">{route.name}</span>
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-500 shrink-0 ml-1">
                       {route.code}
                     </span>
                   </Link>

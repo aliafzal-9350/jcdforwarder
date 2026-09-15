@@ -168,8 +168,10 @@ export default async function RoutePage({ params }: RoutePageProps) {
               Trade Lanes
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-            <span className="font-medium text-slate-800 dark:text-slate-200">
-              China to {route.name}
+            <span className="font-medium text-slate-800 dark:text-slate-200 inline-flex items-center gap-1.5">
+              <span>China to</span>
+              <span className="text-base">{route.flag}</span>
+              <span>{route.name}</span>
             </span>
           </nav>
         </div>
@@ -197,8 +199,9 @@ export default async function RoutePage({ params }: RoutePageProps) {
 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
                   Shipping from China to{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-teal-300">
-                    {route.name}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-teal-300 inline-flex items-center gap-2">
+                    <span>{route.name}</span>
+                    <span className="text-3xl sm:text-4xl lg:text-5xl">{route.flag}</span>
                   </span>
                 </h1>
 

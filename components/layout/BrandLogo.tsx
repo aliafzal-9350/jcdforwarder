@@ -45,9 +45,6 @@ export function BrandLogo({
         >
           FORWARDER
         </span>
-        <span className="hidden xl:inline-block rounded bg-blue-100 dark:bg-blue-950/70 px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/60">
-          NVOCC
-        </span>
       </div>
 
       {showText && (
