@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next';
+import { SITE_CONFIG } from '@/data/siteConfig';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://jcdforwarder.com';
+  const baseUrl = SITE_CONFIG.url;
 
   return {
     rules: [

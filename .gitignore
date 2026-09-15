@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw/unoptimized source assets — not served, kept locally only (can be large)
+/assets-source/

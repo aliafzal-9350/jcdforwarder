@@ -2,6 +2,7 @@ import React from 'react';
 import type { CountryRoute } from '@/data/routes';
 import type { FAQItem } from '@/data/faqs';
 import type { OriginHub } from '@/data/origins';
+import { SITE_CONFIG } from '@/data/siteConfig';
 
 interface JsonLdProps {
   schema: Record<string, unknown> | Array<Record<string, unknown>>;
@@ -19,6 +20,49 @@ export function JsonLd({ schema }: JsonLdProps) {
       }}
     />
   );
+}
+
+/**
+ * Generate sitewide Schema.org Organization schema (injected once, in the root layout)
+ */
+export function createOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE_CONFIG.credentials.legalNameEn,
+    alternateName: SITE_CONFIG.credentials.tradingBrands,
+    url: SITE_CONFIG.url,
+    logo: `${SITE_CONFIG.url}/favicon.ico`,
+    telephone: SITE_CONFIG.contact.phone,
+    email: SITE_CONFIG.contact.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: SITE_CONFIG.facility.hqAddressEn,
+      addressLocality: SITE_CONFIG.facility.city,
+      addressRegion: SITE_CONFIG.facility.province,
+      postalCode: SITE_CONFIG.facility.postalCode,
+      addressCountry: 'CN',
+    },
+    sameAs: [
+      SITE_CONFIG.socials.alibabaTrustPass,
+      SITE_CONFIG.socials.linkedin,
+      SITE_CONFIG.socials.facebook,
+      SITE_CONFIG.socials.instagram,
+      SITE_CONFIG.socials.tiktok,
+    ],
+  };
+}
+
+/**
+ * Generate sitewide Schema.org WebSite schema (injected once, in the root layout)
+ */
+export function createWebsiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_CONFIG.name,
+    url: SITE_CONFIG.url,
+  };
 }
 
 /**

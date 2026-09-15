@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE_CONFIG, getWhatsAppUrl } from "@/data/siteConfig";
@@ -8,6 +8,8 @@ import { ORIGIN_HUBS } from "@/data/origins";
 import { TARGET_ROUTES } from "@/data/routes";
 import { useQuoteModal } from "@/components/quote/QuoteModalContext";
 import { BrandLogo } from "@/components/layout/BrandLogo";
+import { cn } from "@/lib/utils";
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import {
   ShieldCheck,
   Phone,
@@ -15,7 +17,6 @@ import {
   Star,
   MessageCircle,
   Menu,
-  X,
   ChevronDown,
   Plane,
   Ship,
@@ -25,14 +26,11 @@ import {
   Clock,
   Calculator,
   Compass,
-  Building2,
   MapPin,
-  ExternalLink,
   Award,
   ArrowRight,
   ChevronRight,
   Globe,
-  Layers,
   Headphones,
   Search,
   FileText,
@@ -41,6 +39,38 @@ import {
   Ruler,
   Scale,
 } from "lucide-react";
+
+// Closes a hover-driven dropdown when focus truly leaves its container (trigger + panel),
+// so Tab-ing through the panel's links doesn't prematurely close the menu.
+function handleMenuBlur(
+  e: React.FocusEvent<HTMLDivElement>,
+  setOpen: (v: boolean) => void
+) {
+  if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+    setOpen(false);
+  }
+}
+
+function handleMenuKeyDown(
+  e: React.KeyboardEvent<HTMLDivElement>,
+  setOpen: (v: boolean) => void
+) {
+  if (e.key === "Escape") {
+    setOpen(false);
+    e.currentTarget.querySelector<HTMLButtonElement>("button")?.focus();
+  }
+}
+
+function navLinkClass(active: boolean, transparentTop: boolean) {
+  if (transparentTop) {
+    return active
+      ? "text-white bg-white/15"
+      : "text-white/85 hover:text-white hover:bg-white/10";
+  }
+  return active
+    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30"
+    : "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60";
+}
 
 export function Navbar() {
   const pathname = usePathname();
@@ -58,24 +88,36 @@ export function Navbar() {
   // Mobile accordion state
   const [mobileSection, setMobileSection] = useState<string | null>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Close menus on route navigation
-  useEffect(() => {
+  // Close menus on route navigation. Adjusted during render (React's documented pattern for
+  // "reset state when a prop changes") rather than in an effect, to avoid an extra render pass.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setMobileMenuOpen(false);
     setServicesOpen(false);
     setToolsOpen(false);
     setRoutesOpen(false);
     setOriginsOpen(false);
-  }, [pathname]);
+  }
+
+  const scrollTicking = useRef(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollTicking.current) return;
+      scrollTicking.current = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+        scrollTicking.current = false;
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const topTierRoutes = TARGET_ROUTES.slice(0, 12);
+  // The homepage hero is dark, so the header can start transparent/blended and become solid on scroll.
+  // Every other page has a light background immediately below the header, so it stays solid always.
+  const transparentTop = pathname === "/" && !scrolled;
 
   return (
     <header className="w-full z-40 sticky top-0 transition-all">
@@ -147,27 +189,29 @@ export function Navbar() {
 
       {/* 2. MAIN NAVIGATION BAR */}
       <nav
-        className={`w-full transition-all duration-200 ${
+        className={cn(
+          "w-full transition-all duration-200",
           scrolled
             ? "bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-md border-b border-slate-200/80 dark:border-slate-800"
+            : transparentTop
+            ? "bg-slate-950/90 backdrop-blur-md border-b border-white/5"
             : "bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800"
-        }`}
+        )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <BrandLogo href="/" size="md" />
+            <BrandLogo href="/" size="md" variant={transparentTop ? "light" : "default"} />
 
             {/* Desktop Navigation Links */}
             <div className="hidden lg:flex items-center gap-1 xl:gap-2">
               {/* Home */}
               <Link
                 href="/"
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                  pathname === "/"
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30"
-                    : "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60"
-                }`}
+                className={cn(
+                  "px-3 py-2 rounded-lg text-sm font-semibold transition-colors",
+                  navLinkClass(pathname === "/", transparentTop)
+                )}
               >
                 Home
               </Link>
@@ -177,13 +221,17 @@ export function Navbar() {
                 className="relative"
                 onMouseEnter={() => setServicesOpen(true)}
                 onMouseLeave={() => setServicesOpen(false)}
+                onBlur={(e) => handleMenuBlur(e, setServicesOpen)}
+                onKeyDown={(e) => handleMenuKeyDown(e, setServicesOpen)}
               >
                 <button
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    pathname.startsWith("/services")
-                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30"
-                      : "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60"
-                  }`}
+                  aria-haspopup="true"
+                  aria-expanded={servicesOpen}
+                  onFocus={() => setServicesOpen(true)}
+                  className={cn(
+                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors",
+                    navLinkClass(pathname.startsWith("/services"), transparentTop)
+                  )}
                 >
                   <span>Services</span>
                   <ChevronDown className="h-4 w-4 opacity-70" />
@@ -534,13 +582,17 @@ export function Navbar() {
                 className="relative"
                 onMouseEnter={() => setToolsOpen(true)}
                 onMouseLeave={() => setToolsOpen(false)}
+                onBlur={(e) => handleMenuBlur(e, setToolsOpen)}
+                onKeyDown={(e) => handleMenuKeyDown(e, setToolsOpen)}
               >
                 <button
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    pathname.startsWith("/tools")
-                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30"
-                      : "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60"
-                  }`}
+                  aria-haspopup="true"
+                  aria-expanded={toolsOpen}
+                  onFocus={() => setToolsOpen(true)}
+                  className={cn(
+                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors",
+                    navLinkClass(pathname.startsWith("/tools"), transparentTop)
+                  )}
                 >
                   <span>Tools</span>
                   <ChevronDown className="h-4 w-4 opacity-70" />
@@ -753,13 +805,17 @@ export function Navbar() {
                 className="relative"
                 onMouseEnter={() => setRoutesOpen(true)}
                 onMouseLeave={() => setRoutesOpen(false)}
+                onBlur={(e) => handleMenuBlur(e, setRoutesOpen)}
+                onKeyDown={(e) => handleMenuKeyDown(e, setRoutesOpen)}
               >
                 <button
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    pathname.startsWith("/routes")
-                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30"
-                      : "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60"
-                  }`}
+                  aria-haspopup="true"
+                  aria-expanded={routesOpen}
+                  onFocus={() => setRoutesOpen(true)}
+                  className={cn(
+                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors",
+                    navLinkClass(pathname.startsWith("/routes"), transparentTop)
+                  )}
                 >
                   <span>Country Routes</span>
                   <ChevronDown className="h-4 w-4 opacity-70" />
@@ -817,13 +873,17 @@ export function Navbar() {
                 className="relative"
                 onMouseEnter={() => setOriginsOpen(true)}
                 onMouseLeave={() => setOriginsOpen(false)}
+                onBlur={(e) => handleMenuBlur(e, setOriginsOpen)}
+                onKeyDown={(e) => handleMenuKeyDown(e, setOriginsOpen)}
               >
                 <button
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    pathname.startsWith("/origins")
-                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30"
-                      : "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60"
-                  }`}
+                  aria-haspopup="true"
+                  aria-expanded={originsOpen}
+                  onFocus={() => setOriginsOpen(true)}
+                  className={cn(
+                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors",
+                    navLinkClass(pathname.startsWith("/origins"), transparentTop)
+                  )}
                 >
                   <span>Origin Hubs</span>
                   <ChevronDown className="h-4 w-4 opacity-70" />
@@ -874,11 +934,10 @@ export function Navbar() {
               {/* About Us */}
               <Link
                 href="/about-us"
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                  pathname === "/about-us"
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30"
-                    : "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60"
-                }`}
+                className={cn(
+                  "px-3 py-2 rounded-lg text-sm font-semibold transition-colors",
+                  navLinkClass(pathname === "/about-us", transparentTop)
+                )}
               >
                 About Us
               </Link>
@@ -886,11 +945,10 @@ export function Navbar() {
               {/* Contact */}
               <Link
                 href="/contact"
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                  pathname === "/contact"
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30"
-                    : "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/60"
-                }`}
+                className={cn(
+                  "px-3 py-2 rounded-lg text-sm font-semibold transition-colors",
+                  navLinkClass(pathname === "/contact", transparentTop)
+                )}
               >
                 Contact
               </Link>
@@ -915,24 +973,26 @@ export function Navbar() {
               >
                 Quote
               </button>
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="rounded-lg p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
-                aria-label="Toggle navigation menu"
-              >
-                {mobileMenuOpen ? (
-                  <X className="h-6 w-6" />
-                ) : (
+              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                <SheetTrigger
+                  aria-label="Toggle navigation menu"
+                  aria-expanded={mobileMenuOpen}
+                  className={cn(
+                    "rounded-lg p-2 transition-colors",
+                    transparentTop
+                      ? "text-white hover:bg-white/10"
+                      : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  )}
+                >
                   <Menu className="h-6 w-6" />
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+                </SheetTrigger>
 
-        {/* 3. MOBILE RESPONSIVE MENU DRAWER */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-6 space-y-4 animate-in slide-in-from-top-4 duration-200 max-h-[85vh] overflow-y-auto">
+                {/* 3. MOBILE RESPONSIVE MENU DRAWER */}
+                <SheetContent side="right" className="w-full sm:max-w-sm p-0 flex flex-col gap-0">
+                  <div className="border-b border-slate-100 dark:border-slate-800 p-4">
+                    <BrandLogo href="/" size="sm" showText={false} />
+                  </div>
+                  <div className="flex-1 overflow-y-auto px-4 pt-4 pb-6 space-y-4">
             {/* Quick Actions */}
             <div className="grid grid-cols-2 gap-2 pt-2">
               <button
@@ -1097,8 +1157,12 @@ export function Navbar() {
                 Contact &amp; Support
               </Link>
             </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );

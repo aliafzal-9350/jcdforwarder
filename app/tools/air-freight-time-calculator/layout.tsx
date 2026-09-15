@@ -1,0 +1,13 @@
+import type { Metadata } from "next";
+import { SITE_CONFIG } from "@/data/siteConfig";
+
+// This route is a duplicate of /tools/flight-route-calculator (same component, re-exported).
+// Canonical points at the primary URL so search engines consolidate on one page.
+export const metadata: Metadata = {
+  title: "Air Freight Distance & Flight Route Calculator",
+  alternates: { canonical: `${SITE_CONFIG.url}/tools/flight-route-calculator` },
+};
+
+export default function AirFreightTimeCalculatorLayout({ children }: { children: React.ReactNode }) {
+  return children;
+}

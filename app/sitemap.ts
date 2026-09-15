@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next';
 import { TARGET_ROUTES } from '@/data/routes';
 import { ORIGIN_HUBS } from '@/data/origins';
+import { SITE_CONFIG } from '@/data/siteConfig';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://jcdforwarder.com';
+  const baseUrl = SITE_CONFIG.url;
   const currentDate = new Date();
 
   // Core static, service & tool pages
@@ -93,12 +94,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/tools/volumetric-weight-calculator`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
       url: `${baseUrl}/tools/tracking`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
@@ -148,12 +143,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/tools/incoterms`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/tools/incoterms-selector`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.8,
