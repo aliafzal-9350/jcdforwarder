@@ -14,7 +14,7 @@ interface BrandLogoProps {
 
 const SIZES = {
   sm: { mark: "text-base sm:text-lg", sub: "text-[10px]" },
-  md: { mark: "text-xl sm:text-2xl", sub: "text-[11px]" },
+  md: { mark: "text-lg sm:text-xl md:text-2xl", sub: "text-[11px]" },
   lg: { mark: "text-2xl sm:text-3xl", sub: "text-xs" },
 } as const;
 

@@ -77,7 +77,7 @@ function navLinkClass(active: boolean, transparentTop: boolean) {
 export function Navbar() {
   const pathname = usePathname();
   const { openQuoteModal } = useQuoteModal();
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -125,28 +125,31 @@ export function Navbar() {
   return (
     <header className="w-full z-40 sticky top-0 transition-all">
       {/* 1. TOP ANNOUNCEMENT & TRUST BAR */}
-      <div className="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-1.5">
-          {/* Left: NVOCC & Alibaba Trust */}
-          <div className="flex items-center flex-wrap gap-x-4 gap-y-1">
-            <div className="flex items-center gap-1.5 text-slate-200">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <ShieldCheck className="h-3.5 w-3.5 text-blue-400" />
-              <span className="font-semibold text-white">{t("header.nvoccLabel")}</span>
-              <span className="font-mono text-blue-300 font-bold tracking-wide">
-                {SITE_CONFIG.credentials.nvoccLicenseNumber}
+      <div className="bg-slate-950 text-slate-300 text-[11px] sm:text-xs py-1.5 sm:py-2 px-3 sm:px-4 border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 overflow-hidden whitespace-nowrap">
+          {/* Left: NVOCC License & Alibaba Trust */}
+          <div className="flex items-center gap-x-3 lg:gap-x-4 min-w-0 shrink">
+            <div className="flex items-center gap-1.5 text-slate-200 min-w-0">
+              <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+              <ShieldCheck className="h-3.5 w-3.5 text-blue-400 shrink-0" />
+              <span className="font-semibold text-white truncate text-[11px] sm:text-xs">
+                <span className="sm:hidden">{locale === "zh" ? "资质: " : "NVOCC: "}</span>
+                <span className="hidden sm:inline">{t("header.nvoccLabel")}{" "}</span>
+                <span className="font-mono text-blue-300 font-bold tracking-wide">
+                  {SITE_CONFIG.credentials.nvoccLicenseNumber}
+                </span>
               </span>
             </div>
 
-            <span className="hidden sm:inline text-slate-700">|</span>
+            <span className="hidden md:inline text-slate-700">|</span>
 
             <a
               href={SITE_CONFIG.socials.alibabaTrustPass}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 font-medium transition-colors"
+              className="hidden md:inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 font-medium transition-colors"
             >
-              <Award className="h-3.5 w-3.5 text-amber-400" />
+              <Award className="h-3.5 w-3.5 text-amber-400 shrink-0" />
               <span>{t("header.alibabaSupplier")}</span>
               <span className="inline-flex items-center gap-0.5 bg-amber-400/10 px-1.5 py-0.2 rounded text-[11px] text-amber-300 font-bold">
                 <Star className="h-2.5 w-2.5 fill-amber-400 text-amber-400" />
@@ -156,10 +159,10 @@ export function Navbar() {
           </div>
 
           {/* Right: 24/7 Hotline, Email, WhatsApp */}
-          <div className="flex items-center gap-x-4">
+          <div className="flex items-center gap-x-2.5 sm:gap-x-4 shrink-0">
             <a
               href={`tel:${SITE_CONFIG.contact.phone}`}
-              className="hidden md:inline-flex items-center gap-1.5 hover:text-white transition-colors"
+              className="hidden md:inline-flex items-center gap-1.5 hover:text-white transition-colors text-xs"
             >
               <Phone className="h-3 w-3 text-blue-400" />
               <span>{SITE_CONFIG.contact.phoneDisplay}</span>
@@ -169,7 +172,7 @@ export function Navbar() {
 
             <a
               href={`mailto:${SITE_CONFIG.contact.email}`}
-              className="hidden lg:inline-flex items-center gap-1.5 hover:text-white transition-colors"
+              className="hidden lg:inline-flex items-center gap-1.5 hover:text-white transition-colors text-xs"
             >
               <Mail className="h-3 w-3 text-blue-400" />
               <span>{SITE_CONFIG.contact.email}</span>
@@ -181,10 +184,11 @@ export function Navbar() {
               href={getWhatsAppUrl("Hello JCD Forwarder, I am requesting a direct freight quote.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+              className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors text-[11px] sm:text-xs"
             >
-              <MessageCircle className="h-3.5 w-3.5" />
-              <span>{t("header.whatsappDispatch")}</span>
+              <MessageCircle className="h-3.5 w-3.5 shrink-0" />
+              <span className="hidden sm:inline">{t("header.whatsappDispatch")}</span>
+              <span className="sm:hidden">{locale === "zh" ? "WhatsApp 调度" : "WhatsApp"}</span>
             </a>
           </div>
         </div>
@@ -201,8 +205,8 @@ export function Navbar() {
             : "bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800"
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
             <BrandLogo href="/" size="md" variant={transparentTop ? "light" : "default"} />
 
@@ -976,11 +980,11 @@ export function Navbar() {
             </div>
 
             {/* Mobile Hamburger Toggle & Language Switcher */}
-            <div className="flex lg:hidden items-center gap-2">
+            <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
               <LanguageSwitcher transparentTop={transparentTop} />
               <button
                 onClick={() => openQuoteModal()}
-                className="rounded-lg bg-orange-600 px-3 py-1.5 text-xs font-bold text-white shadow-sm cursor-pointer"
+                className="rounded-lg bg-orange-600 hover:bg-orange-700 active:scale-95 px-2.5 py-1.5 text-xs font-bold text-white shadow-sm transition-all cursor-pointer whitespace-nowrap shrink-0"
               >
                 {t("nav.quote")}
               </button>
@@ -989,19 +993,20 @@ export function Navbar() {
                   aria-label="Toggle navigation menu"
                   aria-expanded={mobileMenuOpen}
                   className={cn(
-                    "rounded-lg p-2 transition-colors",
+                    "rounded-lg p-1.5 sm:p-2 transition-colors shrink-0",
                     transparentTop
                       ? "text-white hover:bg-white/10"
                       : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
                   )}
                 >
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
                 </SheetTrigger>
 
                 {/* 3. MOBILE RESPONSIVE MENU DRAWER */}
                 <SheetContent side="right" className="w-full sm:max-w-sm p-0 flex flex-col gap-0">
-                  <div className="border-b border-slate-100 dark:border-slate-800 p-4">
+                  <div className="border-b border-slate-100 dark:border-slate-800 p-4 flex items-center justify-between">
                     <BrandLogo href="/" size="sm" showText={false} />
+                    <LanguageSwitcher transparentTop={false} align="right" />
                   </div>
                   <div className="flex-1 overflow-y-auto px-4 pt-4 pb-6 space-y-4">
             {/* Quick Actions */}

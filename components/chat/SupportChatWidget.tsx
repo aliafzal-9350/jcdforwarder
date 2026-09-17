@@ -22,6 +22,7 @@ import {
   AlertCircle
 } from "lucide-react";
 import { useQuoteModal } from "@/components/quote/QuoteModalContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { SITE_CONFIG, getWhatsAppUrl } from "@/data/siteConfig";
 
 interface ChatMessage {
@@ -161,6 +162,7 @@ function formatInline(text: string): React.ReactNode {
 }
 
 export function SupportChatWidget() {
+  const { locale } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -316,29 +318,31 @@ export function SupportChatWidget() {
   return (
     <>
       {/* 1. FLOATING EXECUTIVE TRIGGER BUTTON */}
-      <div className="fixed bottom-5 right-5 z-40 flex items-center">
+      <div className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-40 flex items-center">
         {!isOpen && (
           <button
             onClick={() => setIsOpen(true)}
             aria-label="Open JCD Freight Advisory Chat"
-            className="group relative flex items-center gap-3 bg-[#081A36] hover:bg-[#0C244C] text-white pl-3.5 pr-5 py-2.5 rounded-full shadow-2xl border border-blue-500/30 hover:border-blue-400 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
+            className="group relative flex items-center gap-2.5 sm:gap-3 bg-[#081A36] hover:bg-[#0C244C] text-white pl-2.5 pr-4 py-2 sm:pl-3.5 sm:pr-5 sm:py-2.5 rounded-full shadow-2xl border border-blue-500/30 hover:border-blue-400 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer whitespace-nowrap shrink-0"
           >
             {/* Logo brand indicator with online pulse */}
             <div className="relative flex items-center justify-center shrink-0">
-              <div className="w-10 h-10 rounded-xl bg-brand-orange flex items-center justify-center overflow-hidden">
-                <span className="text-white font-black text-xs tracking-wider">JCD</span>
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-brand-orange flex items-center justify-center overflow-hidden shadow-sm">
+                <span className="text-white font-black text-[11px] sm:text-xs tracking-wider">JCD</span>
               </div>
-              <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+              <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5 sm:h-3 sm:w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-[#081A36]"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-emerald-500 border-2 border-[#081A36]"></span>
               </span>
             </div>
 
             <div className="text-left">
-              <div className="text-xs font-bold tracking-wider text-blue-200 uppercase">Freight Advisory Desk</div>
-              <div className="text-[11px] text-slate-300 flex items-center gap-1.5">
+              <div className="text-[11px] sm:text-xs font-bold tracking-wider text-blue-200 uppercase">
+                {locale === "zh" ? "货运专家咨询台" : "Freight Advisory Desk"}
+              </div>
+              <div className="text-[10px] sm:text-[11px] text-slate-300 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                <span>Online &bull; 24/7 Dispatch</span>
+                <span>{locale === "zh" ? "在线 • 24/7 极速调度" : "Online • 24/7 Dispatch"}</span>
               </div>
             </div>
           </button>
