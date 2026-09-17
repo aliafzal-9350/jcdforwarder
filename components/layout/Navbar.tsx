@@ -7,6 +7,8 @@ import { SITE_CONFIG, getWhatsAppUrl } from "@/data/siteConfig";
 import { ORIGIN_HUBS } from "@/data/origins";
 import { TARGET_ROUTES } from "@/data/routes";
 import { useQuoteModal } from "@/components/quote/QuoteModalContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
@@ -75,6 +77,7 @@ function navLinkClass(active: boolean, transparentTop: boolean) {
 export function Navbar() {
   const pathname = usePathname();
   const { openQuoteModal } = useQuoteModal();
+  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -129,7 +132,7 @@ export function Navbar() {
             <div className="flex items-center gap-1.5 text-slate-200">
               <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
               <ShieldCheck className="h-3.5 w-3.5 text-blue-400" />
-              <span className="font-semibold text-white">NVOCC License:</span>
+              <span className="font-semibold text-white">{t("header.nvoccLabel")}</span>
               <span className="font-mono text-blue-300 font-bold tracking-wide">
                 {SITE_CONFIG.credentials.nvoccLicenseNumber}
               </span>
@@ -144,7 +147,7 @@ export function Navbar() {
               className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 font-medium transition-colors"
             >
               <Award className="h-3.5 w-3.5 text-amber-400" />
-              <span>Alibaba Verified Gold Supplier</span>
+              <span>{t("header.alibabaSupplier")}</span>
               <span className="inline-flex items-center gap-0.5 bg-amber-400/10 px-1.5 py-0.2 rounded text-[11px] text-amber-300 font-bold">
                 <Star className="h-2.5 w-2.5 fill-amber-400 text-amber-400" />
                 4.7/5.0
@@ -181,7 +184,7 @@ export function Navbar() {
               className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
             >
               <MessageCircle className="h-3.5 w-3.5" />
-              <span>24/7 WhatsApp Dispatch</span>
+              <span>{t("header.whatsappDispatch")}</span>
             </a>
           </div>
         </div>
@@ -213,7 +216,7 @@ export function Navbar() {
                   navLinkClass(pathname === "/", transparentTop)
                 )}
               >
-                Home
+                {t("nav.home")}
               </Link>
 
               {/* TABBED SERVICES MEGA MENU (Services, Country & City Architecture) */}
@@ -233,7 +236,7 @@ export function Navbar() {
                     navLinkClass(pathname.startsWith("/services"), transparentTop)
                   )}
                 >
-                  <span>Services</span>
+                  <span>{t("nav.services")}</span>
                   <ChevronDown className="h-4 w-4 opacity-70" />
                 </button>
 
@@ -597,7 +600,7 @@ export function Navbar() {
                     navLinkClass(pathname.startsWith("/tools"), transparentTop)
                   )}
                 >
-                  <span>Tools</span>
+                  <span>{t("nav.tools")}</span>
                   <ChevronDown className="h-4 w-4 opacity-70" />
                 </button>
 
@@ -820,7 +823,7 @@ export function Navbar() {
                     navLinkClass(pathname.startsWith("/routes"), transparentTop)
                   )}
                 >
-                  <span>Country Routes</span>
+                  <span>{t("nav.routes")}</span>
                   <ChevronDown className="h-4 w-4 opacity-70" />
                 </button>
 
@@ -891,7 +894,7 @@ export function Navbar() {
                     navLinkClass(pathname.startsWith("/origins"), transparentTop)
                   )}
                 >
-                  <span>Origin Hubs</span>
+                  <span>{t("nav.origins")}</span>
                   <ChevronDown className="h-4 w-4 opacity-70" />
                 </button>
 
@@ -945,7 +948,7 @@ export function Navbar() {
                   navLinkClass(pathname === "/about-us", transparentTop)
                 )}
               >
-                About Us
+                {t("nav.aboutUs")}
               </Link>
 
               {/* Contact */}
@@ -956,28 +959,30 @@ export function Navbar() {
                   navLinkClass(pathname === "/contact", transparentTop)
                 )}
               >
-                Contact
+                {t("nav.contact")}
               </Link>
             </div>
 
-            {/* Right Action: Get Instant Quote Button */}
+            {/* Right Action: Language Switcher & Get Instant Quote Button */}
             <div className="hidden lg:flex items-center gap-3">
+              <LanguageSwitcher transparentTop={transparentTop} />
               <button
                 onClick={() => openQuoteModal()}
                 className="flex items-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-orange-600/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
                 <Calculator className="h-4 w-4" />
-                <span>Instant Quote</span>
+                <span>{t("nav.instantQuote")}</span>
               </button>
             </div>
 
-            {/* Mobile Hamburger Toggle */}
+            {/* Mobile Hamburger Toggle & Language Switcher */}
             <div className="flex lg:hidden items-center gap-2">
+              <LanguageSwitcher transparentTop={transparentTop} />
               <button
                 onClick={() => openQuoteModal()}
-                className="rounded-lg bg-orange-600 px-3 py-1.5 text-xs font-bold text-white shadow-sm"
+                className="rounded-lg bg-orange-600 px-3 py-1.5 text-xs font-bold text-white shadow-sm cursor-pointer"
               >
-                Quote
+                {t("nav.quote")}
               </button>
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger
@@ -1006,10 +1011,10 @@ export function Navbar() {
                   setMobileMenuOpen(false);
                   openQuoteModal();
                 }}
-                className="flex items-center justify-center gap-1.5 rounded-xl bg-orange-600 px-4 py-2.5 text-xs font-bold text-white shadow-sm"
+                className="flex items-center justify-center gap-1.5 rounded-xl bg-orange-600 px-4 py-2.5 text-xs font-bold text-white shadow-sm cursor-pointer"
               >
                 <Calculator className="h-4 w-4" />
-                <span>Get Instant Quote</span>
+                <span>{t("nav.getQuote")}</span>
               </button>
 
               <a
@@ -1019,7 +1024,7 @@ export function Navbar() {
                 className="flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-bold text-white shadow-sm"
               >
                 <MessageCircle className="h-4 w-4" />
-                <span>WhatsApp 24/7</span>
+                <span>{t("hero.whatsappDispatch")}</span>
               </a>
             </div>
 
@@ -1155,13 +1160,13 @@ export function Navbar() {
             {/* General Links */}
             <div className="border-t border-slate-100 dark:border-slate-800 pt-3 space-y-2 text-sm font-semibold">
               <Link href="/origins" className="block py-1 text-slate-700 dark:text-slate-200">
-                China Origin Hubs
+                {t("nav.origins")}
               </Link>
               <Link href="/about-us" className="block py-1 text-slate-700 dark:text-slate-200">
-                About JCD Forwarder
+                {t("nav.aboutUs")}
               </Link>
               <Link href="/contact" className="block py-1 text-slate-700 dark:text-slate-200">
-                Contact &amp; Support
+                {t("nav.contact")}
               </Link>
             </div>
                   </div>

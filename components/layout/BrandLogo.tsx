@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface BrandLogoProps {
   className?: string;
@@ -25,6 +26,7 @@ export function BrandLogo({
   variant = "default",
 }: BrandLogoProps) {
   const s = SIZES[size];
+  const { locale } = useLanguage();
 
   const logoContent = (
     <div className={cn("flex flex-col gap-0.5 select-none", className)}>
@@ -57,7 +59,9 @@ export function BrandLogo({
             s.sub
           )}
         >
-          Shenzhen Jiechengda Int&apos;l Freight Forwarding Co., Ltd.
+          {locale === "zh"
+            ? "深圳市捷成达国际货运代理有限公司"
+            : "Shenzhen Jiechengda Int'l Freight Forwarding Co., Ltd."}
         </span>
       )}
     </div>

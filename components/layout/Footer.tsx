@@ -6,13 +6,13 @@ import { SITE_CONFIG, getWhatsAppUrl } from "@/data/siteConfig";
 import { ORIGIN_HUBS } from "@/data/origins";
 import { TARGET_ROUTES } from "@/data/routes";
 import { useQuoteModal } from "@/components/quote/QuoteModalContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import {
   ShieldCheck,
   MapPin,
   Phone,
   Mail,
-  Clock,
   Award,
   Star,
   ExternalLink,
@@ -24,13 +24,12 @@ import {
   Layers,
   Calculator,
   Compass,
-  Building2,
-  FileCheck,
   CheckCircle2,
 } from "lucide-react";
 
 export function Footer() {
   const { openQuoteModal } = useQuoteModal();
+  const { t, locale } = useLanguage();
   const topRoutes = TARGET_ROUTES.slice(0, 10);
 
   return (
@@ -42,14 +41,14 @@ export function Footer() {
             <div className="flex items-center justify-center md:justify-start gap-2">
               <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-xs font-bold uppercase tracking-wider text-blue-400">
-                24/7 Operations Desk • Average Response ≤ 2 Hours
+                {t("footer.operationsDesk")}
               </span>
             </div>
             <h3 className="text-xl font-extrabold text-white tracking-tight">
-              Ready to Ship from China? Get Your All-In DDP Quote
+              {t("footer.topTitle")}
             </h3>
             <p className="text-xs text-slate-400 max-w-2xl">
-              Direct carrier contracts, transparent all-inclusive landed costing, FNSKU Amazon prep, and guaranteed customs release.
+              {t("footer.topSubtitle")}
             </p>
           </div>
 
@@ -59,7 +58,7 @@ export function Footer() {
               className="flex items-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-orange-600/20 transition-all hover:scale-[1.02] cursor-pointer"
             >
               <Calculator className="h-4 w-4" />
-              <span>Launch Quote Wizard</span>
+              <span>{t("footer.launchWizard")}</span>
             </button>
 
             <a
@@ -69,7 +68,7 @@ export function Footer() {
               className="flex items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-600/30 transition-all hover:scale-[1.02]"
             >
               <MessageCircle className="h-4 w-4" />
-              <span>WhatsApp Dispatch</span>
+              <span>{t("footer.whatsappDispatch")}</span>
             </a>
           </div>
         </div>
@@ -83,7 +82,7 @@ export function Footer() {
             <BrandLogo href="/" size="md" variant="light" />
 
             <p className="text-xs leading-relaxed text-slate-400">
-              Shenzhen Jiechengda International Freight Forwarding Co., Ltd. (深圳市捷成达国际货运代理有限公司) is a premier Chinese freight forwarding enterprise holding verified NVOCC license <strong className="text-blue-300 font-mono">GD20240307220907</strong>, providing seamless door-to-door DDP logistics, Amazon FBA prep, ocean FCL/LCL consolidation, and air charters.
+              {t("footer.companyDesc")}
             </p>
 
             {/* Trust Badges */}
@@ -91,19 +90,19 @@ export function Footer() {
               <div className="flex items-center gap-2 text-xs text-slate-300">
                 <ShieldCheck className="h-4 w-4 text-blue-400 shrink-0" />
                 <span>
-                  <strong>NVOCC License:</strong> {SITE_CONFIG.credentials.nvoccLicenseNumber}
+                  <strong>{t("footer.nvoccLicense")}</strong> {SITE_CONFIG.credentials.nvoccLicenseNumber}
                 </span>
               </div>
               <div className="flex items-center gap-2 text-xs text-slate-300">
                 <Award className="h-4 w-4 text-amber-400 shrink-0" />
                 <span>
-                  <strong>Alibaba Verified:</strong> 4.7 / 5.0 Rating (48 Verified Reviews)
+                  <strong>{t("footer.alibabaVerified")}</strong> {t("footer.ratingReviews")}
                 </span>
               </div>
               <div className="flex items-center gap-2 text-xs text-slate-300">
                 <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
                 <span>
-                  <strong>Track Record:</strong> 300,000+ Completed Shipments Worldwide
+                  <strong>{t("footer.trackRecord")}</strong> {t("footer.shipmentsWorldwide")}
                 </span>
               </div>
             </div>
@@ -111,7 +110,7 @@ export function Footer() {
             {/* Official Social Media Channels */}
             <div className="pt-3">
               <span className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-2.5">
-                Official Corporate Channels
+                {t("footer.corporateChannels")}
               </span>
               <div className="flex flex-wrap gap-2">
                 <a
@@ -165,7 +164,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-950/60 text-amber-400 hover:bg-amber-900/60 border border-amber-800/60 text-xs font-semibold transition-colors"
                 >
-                  <Star className="h-3.5 w-3.5 fill-amber-400" /> Alibaba Store
+                  <Star className="h-3.5 w-3.5 fill-amber-400" /> {t("footer.alibabaStore")}
                 </a>
               </div>
             </div>
@@ -174,7 +173,7 @@ export function Footer() {
           {/* Column 2: Core Freight Services */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-              Freight Services
+              {t("footer.freightServices")}
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
@@ -219,7 +218,7 @@ export function Footer() {
             </ul>
 
             <h4 className="text-xs font-bold uppercase tracking-wider text-white pt-4">
-              Calculation Suite
+              {t("footer.calculationSuite")}
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
@@ -254,7 +253,7 @@ export function Footer() {
                   href="/tools"
                   className="hover:text-blue-400 transition-colors text-blue-400 font-semibold"
                 >
-                  ➔ View All Interactive Tools
+                  {t("nav.exploreAllTools")}
                 </Link>
               </li>
             </ul>
@@ -263,7 +262,7 @@ export function Footer() {
           {/* Column 3: 7 Origin Hubs */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-              7 Chinese Origin Hubs
+              {t("footer.originHubs")}
             </h4>
             <ul className="space-y-2 text-xs">
               {ORIGIN_HUBS.map((hub) => (
@@ -283,10 +282,10 @@ export function Footer() {
 
             <div className="pt-4 border-t border-slate-900">
               <span className="text-xs font-bold text-slate-300 block mb-1">
-                Shenzhen Warehouse Base:
+                {t("footer.warehouseBase")}
               </span>
               <p className="text-[11px] text-slate-400 leading-snug">
-                500 m² bonded consolidation center in Bao&apos;an Xinhe with free 7-day storage, FNSKU labeling, and EPAL palletizing.
+                {t("footer.warehouseDesc")}
               </p>
             </div>
           </div>
@@ -294,7 +293,7 @@ export function Footer() {
           {/* Column 4: Key Global Destination Routes & Contact */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-              Top Country Routes
+              {t("footer.topRoutes")}
             </h4>
             <ul className="space-y-1.5 text-xs">
               {topRoutes.map((route) => (
@@ -316,12 +315,14 @@ export function Footer() {
             </ul>
 
             <h4 className="text-xs font-bold uppercase tracking-wider text-white pt-4">
-              Shenzhen HQ Office
+              {t("footer.hqOffice")}
             </h4>
             <div className="space-y-2 text-xs text-slate-400">
               <div className="flex items-start gap-1.5">
                 <MapPin className="h-3.5 w-3.5 text-blue-400 shrink-0 mt-0.5" />
-                <span className="leading-snug">{SITE_CONFIG.facility.hqAddressEn}</span>
+                <span className="leading-snug">
+                  {locale === "zh" ? SITE_CONFIG.facility.hqAddressZh : SITE_CONFIG.facility.hqAddressEn}
+                </span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Phone className="h-3.5 w-3.5 text-blue-400 shrink-0" />
@@ -349,39 +350,42 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-slate-900 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div className="text-center md:text-left space-y-1">
             <p>
-              © {new Date().getFullYear()} {SITE_CONFIG.credentials.legalNameEn}. All Rights Reserved.
+              © {new Date().getFullYear()}{" "}
+              {locale === "zh" ? SITE_CONFIG.credentials.legalNameZh : SITE_CONFIG.credentials.legalNameEn}.{" "}
+              {t("footer.allRightsReserved")}
             </p>
             <p className="text-[11px] text-slate-600">
-              NVOCC License Filing: {SITE_CONFIG.credentials.nvoccLicenseNumber} ({SITE_CONFIG.credentials.licensingBody}). Registered in Shenzhen, Guangdong, China.
+              {t("footer.licenseFiling")} {SITE_CONFIG.credentials.nvoccLicenseNumber} ({SITE_CONFIG.credentials.licensingBody}).{" "}
+              {t("footer.registeredIn")}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-slate-400">
             <Link href="/about-us" className="hover:text-white transition-colors">
-              About Us
+              {t("nav.aboutUs")}
             </Link>
             <span>•</span>
             <Link href="/contact" className="hover:text-white transition-colors">
-              Contact Us
+              {t("nav.contact")}
             </Link>
             <span>•</span>
             <Link href="/routes" className="hover:text-white transition-colors">
-              44 Country Routes
+              {t("nav.routes")}
             </Link>
             <span>•</span>
             <Link href="/origins" className="hover:text-white transition-colors">
-              7 Origin Hubs
+              {t("nav.origins")}
             </Link>
             <span>•</span>
             <Link href="/tools" className="hover:text-white transition-colors">
-              Logistics Tools
+              {t("nav.tools")}
             </Link>
             <span>•</span>
             <a
               href={`mailto:${SITE_CONFIG.contact.email}?subject=Compliance%20Inquiry`}
               className="hover:text-white transition-colors"
             >
-              Customs Compliance
+              {t("footer.customsCompliance")}
             </a>
           </div>
         </div>

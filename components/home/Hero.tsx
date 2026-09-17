@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ShieldCheck, Award, Calculator, MessageCircle } from "lucide-react";
 import { SITE_CONFIG, getWhatsAppUrl } from "@/data/siteConfig";
 import { useQuoteModal } from "@/components/quote/QuoteModalContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useCountUp } from "@/hooks/useCountUp";
 import { GlobalRouteNetwork } from "@/components/home/GlobalRouteNetwork";
@@ -23,6 +24,7 @@ function parseLeadingInt(value: string): number {
 
 export function Hero() {
   const { openQuoteModal } = useQuoteModal();
+  const { t, locale } = useLanguage();
   const reducedMotion = useReducedMotion();
 
   const shipments = useCountUp(parseLeadingInt(SITE_CONFIG.metrics.completedShipments), {
@@ -58,7 +60,7 @@ export function Hero() {
           <div className="flex flex-wrap items-center gap-2">
             <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 px-3 py-1 text-xs font-semibold text-blue-300">
               <ShieldCheck className="h-3.5 w-3.5 text-blue-400" />
-              <span>Verified NVOCC License: {SITE_CONFIG.credentials.nvoccLicenseNumber}</span>
+              <span>{t("hero.nvoccBadge")}</span>
             </div>
 
             <a
@@ -69,29 +71,29 @@ export function Hero() {
             >
               <Award className="h-3.5 w-3.5 text-amber-400" />
               <span>
-                Alibaba {SITE_CONFIG.metrics.alibabaRating}/5 ({SITE_CONFIG.metrics.alibabaReviewCount} Verified Reviews)
+                {locale === "zh"
+                  ? `阿里巴巴 ${SITE_CONFIG.metrics.alibabaRating}/5 (${SITE_CONFIG.metrics.alibabaReviewCount}条真实好评)`
+                  : `Alibaba ${SITE_CONFIG.metrics.alibabaRating}/5 (${SITE_CONFIG.metrics.alibabaReviewCount} Verified Reviews)`}
               </span>
             </a>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-white">
-            China DDP Freight <br />
-            <span className="text-sky-400">Forwarding &amp; Global Logistics</span>
+            {t("hero.titlePart1")} <br />
+            <span className="text-sky-400">{t("hero.titlePart2")}</span>
           </h1>
 
           <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
-            The authoritative Chinese freight forwarder delivering end-to-end Air DDP, Ocean FCL/LCL,
-            China-Europe Rail Express, and Amazon FBA first-leg freight from 7 Chinese sourcing hubs to
-            44 global destinations.
+            {t("hero.description")}
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <button
               onClick={() => openQuoteModal()}
-              className="flex items-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 px-6 py-4 text-sm font-bold text-white shadow-xl shadow-orange-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="flex items-center gap-2 rounded-xl bg-orange-600 hover:bg-orange-700 px-6 py-4 text-sm font-bold text-white shadow-xl shadow-orange-600/25 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
             >
               <Calculator className="h-4 w-4" />
-              <span>Launch Instant Quote Wizard</span>
+              <span>{t("hero.launchQuote")}</span>
             </button>
 
             <a
@@ -101,7 +103,7 @@ export function Hero() {
               className="flex items-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-6 py-4 text-sm font-bold text-white shadow-xl shadow-emerald-600/30 transition-all hover:scale-[1.02]"
             >
               <MessageCircle className="h-4 w-4" />
-              <span>WhatsApp 24/7 Dispatch</span>
+              <span>{t("hero.whatsappDispatch")}</span>
             </a>
           </div>
 
@@ -109,19 +111,19 @@ export function Hero() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-800/80">
             <div>
               <div className="text-2xl sm:text-3xl font-black text-white">{shipments.toLocaleString()}+</div>
-              <div className="text-xs text-slate-400 mt-0.5">Completed Shipments</div>
+              <div className="text-xs text-slate-400 mt-0.5">{t("hero.completedShipments")}</div>
             </div>
             <div>
               <div className="text-2xl sm:text-3xl font-black text-blue-400">{importers.toLocaleString()}+</div>
-              <div className="text-xs text-slate-400 mt-0.5">Importers Served</div>
+              <div className="text-xs text-slate-400 mt-0.5">{t("hero.importersServed")}</div>
             </div>
             <div>
               <div className="text-2xl sm:text-3xl font-black text-amber-400">{rating.toFixed(1)} / 5.0</div>
-              <div className="text-xs text-slate-400 mt-0.5">Alibaba Rating</div>
+              <div className="text-xs text-slate-400 mt-0.5">{t("hero.alibabaRating")}</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-black text-emerald-400">≤ {sla} Hours</div>
-              <div className="text-xs text-slate-400 mt-0.5">SLA Response Time</div>
+              <div className="text-2xl sm:text-3xl font-black text-emerald-400">≤ {sla} {t("hero.hours")}</div>
+              <div className="text-xs text-slate-400 mt-0.5">{t("hero.slaResponseTime")}</div>
             </div>
           </div>
         </motion.div>

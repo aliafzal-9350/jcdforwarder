@@ -3,6 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/data/siteConfig";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { QuoteModalProvider } from "@/components/quote/QuoteModalContext";
 import { QuoteWizardModal } from "@/components/quote/QuoteWizardModal";
 import { Navbar } from "@/components/layout/Navbar";
@@ -26,6 +27,15 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_CONFIG.shortName}`,
   },
   description: SITE_CONFIG.description,
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   keywords: [
     "China freight forwarder",
     "DDP shipping from China",
@@ -72,13 +82,15 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100">
         <JsonLd schema={createOrganizationSchema()} />
         <JsonLd schema={createWebsiteSchema()} />
-        <QuoteModalProvider>
-          <Navbar />
-          <main className="flex-1 w-full">{children}</main>
-          <Footer />
-          <QuoteWizardModal />
-          <SupportChatWidget />
-        </QuoteModalProvider>
+        <LanguageProvider>
+          <QuoteModalProvider>
+            <Navbar />
+            <main className="flex-1 w-full">{children}</main>
+            <Footer />
+            <QuoteWizardModal />
+            <SupportChatWidget />
+          </QuoteModalProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
